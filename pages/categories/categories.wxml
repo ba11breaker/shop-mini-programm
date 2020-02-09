@@ -1,0 +1,33 @@
+<!--pages/categories/categories.wxml-->
+<view class="container">
+  <view class="search">
+    <input type="text" placeholder="点击搜索商品" value="{{name}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
+    <image src="/images/icon/search.svg"></image>
+  </view>
+  <view class="content-container">
+    <scroll-view class="category-container" scroll-y="true" scroll-with-animation="true">
+      <view wx:if="{{categories.length > 0}}" class="category {{categorySelected.id==category.id?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="id" data-id="{{category.id}}" bindtap="onCategoryClick">
+        <view class="name {{categorySelected.id==category.id?'active':''}}">{{category.name}}</view>
+      </view>
+    </scroll-view>
+
+    <scroll-view class="goods-container" scroll-y="true" scroll-top="{{scrolltop}}" wx:if="{{onLoadStatus}}">
+      <view wx:if="{{currentBrands.length==0}}" class="no-data">
+        <view class="line"></view>
+        <view class="txt">暂无相关</view>
+        <view class="line"></view>
+      </view>
+      <view class="box" wx:if="{{currentBrandsBox.length>0&&categorySelected.id==0}}" wx:for="{{currentBrandsBox}}" wx:for-item="item" wx:key="index">
+        <view class="goods" wx:for="{{item.box}}" wx:key="id" wx:for-item="brand" data-id="{{brand.name}}" bindtap="tapBrandFirst"> 
+          <image mode="aspectFill" class="pic" src="{{brand.pic}}"></image>
+        </view>
+      </view>
+      <view class="box1" wx:if="{{currentBrandsBox.length>0&&categorySelected.id>0}}" wx:for="{{currentBrandsBox}}" wx:for-item="item" wx:key="index">
+        <view class="goods" wx:for="{{item.box}}" wx:key="id" wx:for-item="brand" data-id="{{brand.name}}" bindtap="tapBrandSecond"> 
+          <image mode="aspectFill" class="pic" src="{{brand.pic}}"></image>
+          <view>{{brand.name}}</view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

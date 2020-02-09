@@ -1,0 +1,10 @@
+<!--pages/goods-details/index.wxml-->
+<view class="container">
+  <view class="swiper-container">
+    <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
+      <swiper-item wx:for="{{images}}" wx:key="id">
+        <image src="{{item}}" class="slide-image" mode="aspectFill" lazy-load="true"></image>
+      </swiper-item>
+    </swiper>
+  </view>
+</view>

@@ -1,0 +1,59 @@
+<!--index.wxml-->
+<view class="swiper-container">
+  <swiper indicator-dots="true" indicator-active-color="#fff" autoplay circular>
+    <swiper-item wx:for="{{banners}}" wx:key="id">
+      <image mode="aspectFill" bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.imageUrl}}"></image>
+    </swiper-item>
+  </swiper>
+  <view class="search">
+    <input type="text" placeholder="点击搜索商品" value="{{name}}" bindinput="bindinput" bindconfirm="bindconfirm"></input>
+    <image src="/images/icon/search.svg"></image>
+  </view>
+</view>
+<!--category box-->
+<view class="category-box">
+  <view class="category-list">
+    <view class="category-column" bindtap="tabClick">
+     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/all.jpg"></image>
+    </view>
+  </view>
+  <view class="category-list">
+    <view class="category-column" bindtap="tabClick">
+     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/special.jpg"></image>
+    </view>
+  </view>
+  <view class="category-list">
+    <view class="category-column" bindtap="tabClick">
+     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/check.jpg"></image>
+    </view>
+  </view>
+  <view class="category-list">
+    <view class="category-column" bindtap="tabClick">
+     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/idcard.jpg"></image>
+    </view>
+  </view>
+</view>
+<!--main container-->
+<view class="container">
+  <!--brands recommend-->
+  <view class="weui-loadmore weui-loadmore_line" wx:if="{{homeBrands.length > 0}}">
+    <view class="weui-loadmore__tips weui-loadmore__tips_in-line">品牌推荐</view>
+  </view>
+  <view class="brands-container" wx:if="{{homeBrands.length > 0}}">
+    <view class="brands-box" wx:for-items="{{homeBrands}}" wx:key="*this" bindtap="toDetailsTap" data-id="{{item.id}}">
+      <view class="img-box">
+        <image src="{{item.imageUrl}}" class="image" mode="aspectFill" lazy-load="true"></image>
+      </view>
+    </view>
+  </view>
+  
+  <!--goods recommend-->
+  <view class="content-container" wx:if="{{categories.length > 0}}">
+    <scroll-view class="category-container" scroll-x="true" scroll-with-animation="true">
+      <view class="category {{categorySelected.title==category.title?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="title" data-id="{{category.title}}" bindtap="onCategoryClick">
+        <view class="name {{categorySelected.title==category.title?'active':''}}">{{category.title}}</view>
+        <view class="name {{categorySelected.title==category.title?'active':''}}">{{category.description}}</view>
+      </view>
+    </scroll-view>
+  </view>
+</view>

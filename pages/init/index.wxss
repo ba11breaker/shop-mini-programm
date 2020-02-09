@@ -1,0 +1,43 @@
+/* pages/init/index.wxss */
+.icon-container {
+  padding-top: 15vh;
+  width: 150px;
+  height: 150px;
+  margin: auto;
+}
+
+.icon-container image {
+  width: 100%;
+}
+
+.domain-input {
+  width: 150px;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.domain-input input {
+  border-bottom: 1px solid black;
+  text-align: center;
+  padding: 10px;
+}
+
+.domain-input button {
+  font-size: 14px;
+  width: 150px;
+  margin: 15px 0;
+  background: unset;
+  border: grey 1px solid;
+}
+
+.arrows {
+  height: 15px;
+  width: 15px;
+}
+
+
+.go-btn text{
+  margin: 3px;
+  vertical-align: auto;
+  font-size: 13px;
+}

@@ -1,0 +1,60 @@
+{
+  "pages": [
+    "pages/init/index",
+    "pages/index/index",
+    "pages/categories/categories",
+    "pages/goods/list",
+    "pages/goods/catlist",
+    "pages/goods-details/index",
+    "pages/explore/index",
+    "pages/cart/index",
+    "pages/my/index"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "QPanda",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#8a8a8a",
+    "selectedColor": "#2c2c2c",
+    "borderStyle": "white",
+    "backgroundColor": "#fff",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/categories/categories",
+        "iconPath": "images/nav/ic_catefory_normal.png",
+        "selectedIconPath": "images/nav/ic_catefory_pressed.png",
+        "text": "分类"
+      },
+      {
+        "pagePath": "pages/explore/index",
+        "iconPath": "images/nav/ic_explore_normal.png",
+        "selectedIconPath": "images/nav/ic_explore_pressed.png",
+        "text": "发现"
+      },
+      {
+        "pagePath": "pages/cart/index",
+        "iconPath": "images/nav/cart-off.png",
+        "selectedIconPath": "images/nav/cart-on.png",
+        "text": "购物车"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "iconPath": "images/nav/my_off.png",
+        "selectedIconPath": "images/nav/my_on.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {
+  },
+  "sitemapLocation": "sitemap.json"
+}

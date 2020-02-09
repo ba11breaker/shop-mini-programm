@@ -1,0 +1,26 @@
+/* pages/goods-details/index.wxss */
+.container {
+  background-color: #f2f2f2;
+  min-height: 100%;
+  padding-bottom:100 rpx;
+}
+.swiper-container{
+  width: 100%;
+  background-color: #fff;
+}
+.swiper_box {
+  width: 100%;
+  height: 480rpx;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.swiper-item {
+  width: 470rpx;
+  height:480px;
+}
+.swiper-item image {
+  width: 470rpx;
+  overflow: hidden;
+  height: 480rpx;
+}

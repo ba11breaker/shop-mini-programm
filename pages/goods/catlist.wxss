@@ -1,0 +1,126 @@
+/* pages/goods/catlist.wxss */
+page{
+  background-color: #f6f6f6;
+  height: 100vh;
+  width:100wh;
+}
+.header{
+  width:100%;
+  height: 8vh;
+  display: flex;
+}
+.header view{
+  position:relative;
+  color:#fff;
+  margin: 20rpx 20rpx 0rpx;
+  font-size:35rpx
+}
+
+.goods-bar{
+  background-color:#fff;
+  width: 100%;
+  height: 8vh;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+.goods-bar view{
+  width:33%;
+  height: 5.5vh;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size:2.5vh;
+}
+.goods-bar view image{
+  padding: 0rpx 5rpx 0rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.brands-bar{
+  width: 100%;
+  height: 6vh;
+  background:#fff;
+  display: flex;
+}
+.brands-bar view{
+  width: 15vw;
+  margin-left: 4vw;
+  font-size: 4vw;
+  text-align: center;
+  padding-top: 0.5vh;
+}
+
+.brands-bar .brands-container{
+  white-space: nowrap;
+  display: flex;
+  width: 83vw;
+  height: 6vh;
+}
+.brands-bar .brands-container view{
+  width: auto;
+  height:5vh;
+  font-size:2vh;
+  display: inline-block;
+  margin: 0rpx 2vw 0rpx;
+}
+.brands-bar .brands-container .active{
+  color:#ff0000;
+}
+
+.large-container{
+  display: block;
+  width: 100vw;
+  height: 76vh;
+}
+.large-container .goods-container{
+  flex: 1;
+  height:77vh;
+}
+.large-container .goods-container .no-data{
+  color:#67757d;
+  margin-top: 35vh;
+}
+.large-container .goods-container .box{
+  padding: 10rpx 10rpx;
+  margin: 5rpx 2vw 10rpx;
+  font-size: 36rpx;
+  line-height: 60rpx;
+  height: 20vh;
+  width: 93vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+}
+.large-container .goods-container .box .good-image{
+  width: 32vw;
+  height: 20vh;
+}
+.large-container .goods-container .info-container{
+  width:55vw;
+  height:20vh;
+  padding:0vh 2vw 0vh;
+}
+.large-container .goods-container .info-container .good-name{
+  height: 10vh;
+  font-size: 2.5vh;
+}
+.large-container .goods-container .info-container .good-price{
+  color: #ff0000;
+  font-size: 2.2vh;
+}
+.large-container .goods-container .info-container .bottom{
+  width:55vw;
+  display:flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+}
+.large-container .goods-container .info-container .bottom view{
+  font-size: 2vh;
+  color: #67757d;
+}
+.large-container .goods-container .info-container .bottom image{
+  width: 4vh;
+  height: 4vh;
+}

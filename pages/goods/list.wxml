@@ -1,0 +1,36 @@
+<!--pages/goods/list.wxml-->
+<view class="header" style="background-color: {{colors.darkPrimary}};">
+  <view>{{brand}}</view>
+</view>
+<view class="goods-bar">
+  <view class="normal" bindtap="onClickDefault">综合排序</view>
+  <view class="normal}" bindtap="onClickPrice" data-id="{{sortedByPrice}}">
+    价格<image wx:if="{{sortedBy==='price'}}" src="{{sortedByPrice?'/images/goodslist/up.png':'/images/goodslist/down.png'}}"></image>
+  </view>
+  <view class="normal" bindtap="onClickTime" data-id="{{sortedByTime}}">
+    上架时间<image wx:if="{{sortedBy==='time'}}" src="{{sortedByTime?'/images/goodslist/up.png':'/images/goodslist/down.png'}}"></image>
+  </view>
+</view>
+
+<view class="large-container">
+  <scroll-view class="goods-container" scroll-y="true" scroll-top="scrolltop">
+    <view wx:if="{{goods.length==0}}" class="no-data">
+      <view class="line"></view>
+      <view class="txt">暂无相关</view>
+      <view class="line"></view>
+    </view>
+    <view wx:if="{{goods.length>0}}" class="box" wx:for="{{goods}}" wx:for-item="item" wx:key="id">
+      <image class="good-image" src="{{item.images}}" bindtap="onClickGood" data-id="{{item.id}}"></image>
+      <view class="info-container">
+        <view class="good-name" bindtap="onClickGood" data-id="{{item.id}}">{{item.name}}</view>
+        <view class="good-price">AUD${{item.price[0]}}</view>
+        <view class="bottom"> 
+          <view>约￥{{item.price[1]}}</view>
+          <image src="/images/goodslist/cart.png"></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view> 
+
+

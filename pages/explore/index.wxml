@@ -1,0 +1,27 @@
+<!--pages/explore/index.wxml-->
+<view class="category-box">
+  <view class="bar">
+    <view class="text-first">精选栏目</view>
+    <view class="text-second">滑动查看</view>
+  </view>
+  <scroll-view class="section-container" scroll-x="true" scroll-with-animation="true" enable-flex="true">
+    <view class="sections" wx:if="{{sections.length>0}}" wx:for="{{sections}}" wx:for-item="section" wx:key="id">
+      <image mode="aspectFill" class="pic" src="{{section.img_url}}"></image>
+      <view>{{section.name}}</view>
+    </view>
+  </scroll-view>
+</view>
+
+<view class="medias-box">
+  <view class="bar">
+    <view>媒体中心</view>
+  </view>
+  <view class="medias">
+    <view></view>
+    <view></view>
+  </view>
+</view>
+
+<view class="article-container">
+  
+</view>

@@ -1,0 +1,20 @@
+<!--pages/init/index.wxml-->
+<view>
+  <view class="icon-container">
+    <image mode="widthFix"  src="https://beta.pandapos.app/assets/imgs/logo.svg"></image>
+  </view>
+  <view class="domain-input" wx: if="{{requiredDomain && !historyShops.length}}">
+    <label>商城码</label>
+    <input bindinput="updateDomain" value="{{domain}}"></input>
+
+
+    <button bindtap="submitDomain" class="go-btn">
+      <text>立刻前往</text>
+      <text></text>
+    </button>
+  </view>
+  <view ex:elif="{{requiredDomain && historyShops.length}}">
+    <view wx:for="{{historyShops}}" wx:key="*this">
+    </view>
+  </view>
+</view>
