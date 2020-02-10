@@ -1,5 +1,6 @@
 // pages/goods-details/index.js
 const app = getApp();
+const WxParse = require('../../wxParse/wxParse.js');
 
 Page({
 
@@ -11,16 +12,23 @@ Page({
     goodInfo: {},
     selectedPrice: 0,
 
-    images: []
+    images: [],
+
+    colors: [],
+
+    showSelected: 'introduct', //'introduct', 'prarmter', 'aftersale'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    const that = this;
     let goodID = options.goodID;
+    let colors = JSON.parse(app.globalData.colors);
     this.setData({
-      goodID: goodID
+      goodID: goodID,
+      colors: colors
     });
     wx.setNavigationBarTitle({
       title: '商品详情',
@@ -45,6 +53,7 @@ Page({
     });
     this.getImages();
     this.getPrice();
+    WxParse.wxParse('article', 'html', goodInfo.content, that, 5);
 
     wx.hideToast();
   },
@@ -67,6 +76,49 @@ Page({
     price = Math.round(price * 100) / 100;
     that.setData({
       selectedPrice: price
+    });
+  },
+
+  onClickIntro: function(e) {
+    this.setData({
+      showSelected: 'introduct'
+    });
+  },
+
+  onClickPara: function(e) {
+    this.setData({
+      showSelected: 'parameter'
+    });
+  },
+
+  onClickAfter: function(e) {
+    this.setData({
+      showSelected: 'aftersale'
+    });
+  },
+
+  onClickReturnCat: function(e){
+    wx.switchTab({
+      url: '/pages/categories/categories',
+    })
+  },
+
+  addCart: function(e) {
+    const that = this;
+    let cart = app.globalData.cart;
+    if(!cart.has(that.data.goodID)) {
+      cart.set(that.data.goodID, 1);
+    } else {
+      let preCount = cart.get(that.data.goodID);
+      preCount++;
+      cart.set(that.data.goodID, preCount);
+    }
+    app.globalData.cart = cart;
+    console.log(app.globalData.cart);
+    wx.showToast({
+      title: '添加成功',
+      icon: 'success',
+      duration: 700
     });
   }
 })

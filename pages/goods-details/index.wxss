@@ -1,4 +1,5 @@
 /* pages/goods-details/index.wxss */
+@import "/wxParse/wxParse.wxss";
 .container {
   background-color: #f2f2f2;
   min-height: 100%;
@@ -37,7 +38,7 @@ swiper-item image {
 }
 .goods-info .goods-profile .p {
   color: #ff5500;
-  font-size: 12pt;
+  font-size: 14pt;
   margin-left: 30rpx;
 }
 .goods-info .goods-title{
@@ -95,4 +96,108 @@ swiper-item image {
 .logistics-info .info-icon image{
   width: 28rpx;
   height: 28rpx;
+}
+
+.fee-info {
+  background-color: #fff;
+  padding: 20rpx 20rpx;
+  margin: 20rpx 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+}
+.fee-info .fee-title {
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.fee-info .fee-title text {
+  color:#6c757d;
+  font-size:28rpx;
+}
+.fee-info .fee-body {
+  width: 70%;
+}
+.fee-info .fee-body text{
+  font-size:28rpx;
+}
+.fee-info .fee-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+}
+.fee-info .fee-icon image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.info-bar {
+  background-color:#fff;
+  width: 100%;
+  height: 8vh;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content: space-between;
+}
+.info-bar .normal {
+  width:33%;
+  height: 5.5vh;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size:2.5vh;
+  color:#6c757d;
+}
+.info-bar .normal.active {
+  color:#000;
+}
+
+.info-box {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+  margin-bottom: 120rpx;
+}
+.info-box .goods-text {
+  padding: 0 10prx;
+  font-size: 28rpx;
+  color:#666666;
+  line-height: 56rpx;
+  margin-bottom: 30rpx;
+}
+
+.footer-box {
+  width: 100%;
+  height: 100rpx;
+  background-color: #e8e8ed;
+  position: fixed;
+  bottom: 0;
+  left:0;
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+  box-shadow: 0 0 6rpx 0;
+}
+.footer-box .return-category {
+  margin-left:20rpx;
+  font-size:33rpx;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.footer-box .add-to-cart {
+  width: 200rpx;
+  height: 100%;
+  border-radius: 4;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.footer-box .add-to-cart text {
+  text-align: center;
+  font-size: 33rpx;
+  color: #fff;
 }

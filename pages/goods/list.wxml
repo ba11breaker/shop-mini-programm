@@ -4,7 +4,7 @@
 </view>
 <view class="goods-bar">
   <view class="normal" bindtap="onClickDefault">综合排序</view>
-  <view class="normal}" bindtap="onClickPrice" data-id="{{sortedByPrice}}">
+  <view class="normal" bindtap="onClickPrice" data-id="{{sortedByPrice}}">
     价格<image wx:if="{{sortedBy==='price'}}" src="{{sortedByPrice?'/images/goodslist/up.png':'/images/goodslist/down.png'}}"></image>
   </view>
   <view class="normal" bindtap="onClickTime" data-id="{{sortedByTime}}">

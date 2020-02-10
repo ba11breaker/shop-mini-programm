@@ -29,6 +29,23 @@ Page({
     this.setCategories();
   },
 
+  onShow: function () {
+    // 显示购物车红点
+    if (app.globalData.cart.size > 0) {
+      wx.showTabBarRedDot({
+        index: 3,
+      }) 
+      wx.setTabBarBadge({
+        index: 3,
+        text: app.globalData.cart.size.toString()
+      })
+    } else {
+      wx.hideTabBarRedDot({
+        index: 3,
+      })
+    }
+  },
+
   /**
    * Sets the data of categories
    */

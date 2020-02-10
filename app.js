@@ -17,6 +17,8 @@ App({
 
     blogtypes: [],
 
+    cart: new Map(),
+
     userInfo: {},
     token: '',
     refreshToken: '',
@@ -173,5 +175,5 @@ App({
         }
       });
     });
-  }
+  },
 })

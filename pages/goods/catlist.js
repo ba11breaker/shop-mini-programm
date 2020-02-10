@@ -24,14 +24,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: async function (options) {
+    wx.setNavigationBarTitle({
+      title: options.cat
+    });
     let cat = options.cat.split(",");
     let colors = JSON.parse(app.globalData.colors);
     this.setData({
       cat: cat,
       colors: colors
-    });
-    wx.setNavigationBarTitle({
-      title: options.cat
     });
     console.log(cat);
     wx.showToast({

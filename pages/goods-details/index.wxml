@@ -1,4 +1,5 @@
 <!--pages/goods-details/index.wxml-->
+<import src="../../wxParse/wxParse.wxml" />
 <view class="container">
   <view class="swiper-container">
     <swiper class="swiper_box" indicator-dots="true" indicator-active-color="#fff" autoplay circular>
@@ -13,7 +14,7 @@
       <view class="p">${{selectedPrice}}</view>
     </view>
     <view class="goods-info-fx">
-      <template is=""></template>
+      <!--<template is=""></template>-->
     </view>
     <view class="goods-title">{{goodInfo.name}}</view>
     <view class="goods-brief">{{goodInfo.stock_brief}}</view>
@@ -27,4 +28,34 @@
     </view>
     <view class="info-icon"><image src="/images/goods-detail/right.png"></image></view>
   </view>
+
+  <view class="fee-info">
+    <view class="fee-title"><text>费用</text></view>
+    <view class="fee-body"><text>查看运费规则</text></view>
+    <view class="fee-icon"><image src="/images/goods-detail/right.png"></image></view>
+  </view>
+
+  <view class="info-bar">
+    <view class="normal {{showSelected=='introduct'?'active':''}}" bindtap="onClickIntro">商品介绍</view>
+    <view class="normal {{showSelected=='parameter'?'active':''}}" bindtap="onClickPara">规则参数</view>
+    <view class="normal {{showSelected=='aftersale'?'active':''}}" bindtap="onClickAfter">售后保障</view>
+  </view>
+
+  <view class="info-box">
+    <view class="goods-text" wx:if="{{showSelected=='introduct'}}">
+      <template is="wxParse" data="{{wxParseData: article.nodes}}"></template>
+    </view>
+    <view class="goods-text" wx:if="{{showSelected=='parameter'}}">
+    </view>
+    <view class="goods-text" wx:if="{{showSelected=='aftersale'}}">
+    </view>
+  </view>
+
+  <view class="footer-box">
+      <view class="return-category" bindtap="onClickReturnCat"><text style="color:{{colors.darkPrimary}}">{{'<'}}   返回分类</text></view>
+      <view class="add-to-cart" style="background-color:{{colors.darkPrimary}}" bindtap="addCart">
+        <text>加入购物车</text>
+      </view>
+  </view>
 </view>
+
