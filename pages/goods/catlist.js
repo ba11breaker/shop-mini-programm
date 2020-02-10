@@ -66,10 +66,10 @@ Page({
         images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
         price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * currentRate * 100) / 100],
         name: goodInfo[i].name,
-        brand: goodInfo[i].brand,
+        brand: goodInfo[i].stock_brand,
         isShow: true
       })
-      brands.set(goodInfo[i].brand, true); 
+      brands.set(goodInfo[i].stock_brand, true); 
     }
     brands = [...brands];
     for (var i = 0; i < brands.length; i++) {

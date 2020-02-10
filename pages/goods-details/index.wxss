@@ -10,17 +10,89 @@
 }
 .swiper_box {
   width: 100%;
-  height: 480rpx;
+  height: 40vh;
+}
+swiper-item {
+  text-align: center;
+}
+swiper-item image {
+  width: 38vh;
+  height: 37vh;
+}
+
+.goods-info {
+  background-color: #fff;
+  margin-bottom:5rpx;
+  width: 100%;
+  position:relative;
+}
+.goods-info-fx {
+  position: absolute;
+  right: 35rpx;
+  bottom: 60rpx;
+}
+.goods-info .goods-profile {
+  display: flex;
+  align-items: center;
+}
+.goods-info .goods-profile .p {
+  color: #ff5500;
+  font-size: 12pt;
+  margin-left: 30rpx;
+}
+.goods-info .goods-title{
+  box-sizing: border-box;
+  padding:0 35rpx;
+  font-size: 37rpx;
+  line-height: 1.4;
+  color: #000;
+  margin-bottom:28rpx;
+}
+.goods-info .goods-brief{
+  box-sizing: border-box;
+  padding:0 35rpx;
+  font-size: 30rpx;
+  line-height: 1.4;
+  color: #6c757d;
+  margin-bottom:28rpx;
+}
+
+.logistics-info {
+  background-color: #fff;
+  padding: 10rpx 20rpx;
+  margin: 20rpx 0;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: space-between;  
+  flex-wrap:wrap;
+}
+.logistics-info .info-title{
+  width: 10%;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
+  align-items: center
 }
-.swiper-item {
-  width: 470rpx;
-  height:480px;
+.logistics-info .info-title text{
+  color:#6c757d;
+  font-size:28rpx;
 }
-.swiper-item image {
-  width: 470rpx;
-  overflow: hidden;
-  height: 480rpx;
+.logistics-info .info-body{
+  width: 70%;
+}
+.logistics-info .info-body view{
+  width: 100%;
+}
+.logistics-info .info-body view text{
+  font-size:28rpx;
+}
+.logistics-info .info-icon{
+  width: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+.logistics-info .info-icon image{
+  width: 28rpx;
+  height: 28rpx;
 }

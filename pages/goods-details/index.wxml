@@ -7,4 +7,24 @@
       </swiper-item>
     </swiper>
   </view>
+
+  <view class="goods-info">
+    <view class="goods-profile">
+      <view class="p">${{selectedPrice}}</view>
+    </view>
+    <view class="goods-info-fx">
+      <template is=""></template>
+    </view>
+    <view class="goods-title">{{goodInfo.name}}</view>
+    <view class="goods-brief">{{goodInfo.stock_brief}}</view>
+  </view>
+
+  <view class="logistics-info">
+    <view class="info-title"><text>物流</text></view>
+    <view class="info-body">
+      <view><text>澳洲直邮到全国各地：</text></view>
+      <view><text>我们提供全国直邮服务，请关注物流并及时支付</text></view>
+    </view>
+    <view class="info-icon"><image src="/images/goods-detail/right.png"></image></view>
+  </view>
 </view>

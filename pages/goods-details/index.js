@@ -9,6 +9,7 @@ Page({
   data: {
     goodID: '',
     goodInfo: {},
+    selectedPrice: 0,
 
     images: []
   },
@@ -43,6 +44,7 @@ Page({
       goodInfo: goodInfo
     });
     this.getImages();
+    this.getPrice();
 
     wx.hideToast();
   },
@@ -56,6 +58,15 @@ Page({
     }
     that.setData({
       images: imagesURL
+    });
+  },
+
+  getPrice(){
+    const that = this;
+    let price = that.data.goodInfo.price;
+    price = Math.round(price * 100) / 100;
+    that.setData({
+      selectedPrice: price
     });
   }
 })
