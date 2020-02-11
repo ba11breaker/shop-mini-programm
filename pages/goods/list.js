@@ -141,5 +141,25 @@ Page({
     wx.navigateTo({
       url: `/pages/goods-details/index?goodID=${goodID}`
     })
+  },
+
+  addCart: function (e) {
+    const that = this;
+    let cart = app.globalData.cart;
+    let id = e.target.dataset.id;
+    if (!cart.has(id)) {
+      cart.set(id, 1);
+    } else {
+      let preCount = cart.get(id);
+      preCount++;
+      cart.set(id, preCount);
+    }
+    app.globalData.cart = cart;
+    console.log(app.globalData.cart);
+    wx.showToast({
+      title: '添加成功',
+      icon: 'success',
+      duration: 700
+    });
   }
 })

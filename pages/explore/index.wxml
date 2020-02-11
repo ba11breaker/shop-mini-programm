@@ -16,12 +16,30 @@
   <view class="bar">
     <view>媒体中心</view>
   </view>
-  <view class="medias">
-    <view></view>
-    <view></view>
-  </view>
+  <scroll-view class="media-container" scroll-x="true" scroll-with-animation="true" enable-flex="true">
+    <view class="medias" wx:if="{{medias.length>0}}" wx:for="{{medias}}" wx:for-item="media" wx:key="id">
+      <image mode="aspectFill" class="pic" src="{{media.img_url}}"></image>
+      <view>{{media.name}}</view>
+    </view> 
+  </scroll-view>
 </view>
 
-<view class="article-container">
-  
+<view class="info-bar">
+  <view class="normal {{typeSelected=='article'?'active':''}}" bindtap="onClickArticle">文章</view>
+  <view class="normal {{typeSelected=='moment'?'active':''}}" bindtap="onClickMoment">朋友圈</view>
+</view>
+
+<view class="info-container">
+  <scroll-view class="article-container" scroll-y="true" scroll-top="0" wx:if="{{typeSelected=='article'}}">
+    <view class="box" wx:for="{{articles}}" wx:for-item="item" wx:key="id" bindtap="tapArticle" data-id="{{item.id}}">
+      <view class="brief-box">
+        <view class="title">
+        <text>{{item.title}}\n</text>
+        <text wx:if="{{item.subtitle!=title}}" class="subtitle">{{item.subtitle}}</text>
+        </view>
+        <view class="date">{{item.date}}</view>
+      </view>
+      <view class="img-box"><image src="{{item.img}}"></image></view>
+    </view>
+  </scroll-view>
 </view>

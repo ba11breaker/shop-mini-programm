@@ -64,16 +64,97 @@ page{
   font-size: 30rpx;
   margin: 25rpx 15rpx 10rpx;
 }
-.medias-box .medias{
+.medias-box .media-container{
+  width:100%;
+  height:220rpx;
+  background-color:#fff;
   display: flex;
+  margin: 5rpx 5rpx 0rpx;
+}
+.media-container .medias{
+  width: 300rpx;
+  height: 180rpx;
+  margin: 0rpx 10rpx 0rpx; 
+}
+.media-container .medias .pic{
+  width: 280rpx;
+  height: 150rpx;
+  margin: auto;
+}
+.media-container .medias view{
+  font-size:25rpx;
+  text-align: center;
+  color: #888;
+}
+
+.info-bar{
+  background-color:#fff;
+  width: 100%;
+  height: 8vh;
+  display:flex;
   flex-wrap:wrap;
   justify-content: space-between;
-  width:100%;
+  margin-top: 10rpx;
 }
-.medias-box .medias view{
-  margin: 10rpx 15rpx 60rpx;
-  width:45vw;
-  height:20vh;
-  background-color: #f6f6f6;
+.info-bar .normal{
+  width:50%;
+  height: 5.5vh;
+  text-align: center;
+  margin-top: 20rpx;
+  font-size:2.5vh;
+  color:#6c757d;
+}
+.info-bar .normal.active{
+  color: #000;
+}
+
+.info-container{
+  width: 100vw;
+  height: 92vh;
+}
+.info-container .article-container{
+  flex: 1;
+  height: 92vh;
+}
+.info-container .article-container .box{
+  padding: 10rpx 10rpx;
+  margin: 15rpx 2vw 15rpx;
+  font-size:36rpx;
+  line-height: 60rpx;
+  height:26vh;
+  width: 96vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.info-container .article-container .box .brief-box{
+  width: 49vw;
+  height: 26vh;
+  padding: 5rpx;
+}
+.info-container .article-container .box .brief-box .title{
+  width: 48vw;
+  height: 20vh;
+  font-size:2.8vh;
+  line-height: 3.6vh;
+}
+.info-container .article-container .box .brief-box .title .subtitle{
+  font-size: 2.5vh;
+  color: #6c757d;
+}
+.info-container .article-container .box .brief-box .date{
+  width: 49vw;
+  height: 4vh;
+  font-size:2.5vh;
+  color:#6c757d;
+}
+.info-container .article-container .box .img-box{
+  width: 45vw;
+  height: 26vh;
+}
+.info-container .article-container .box .img-box image{
+  width: 45vw;
+  height: 26vh;
 }
 

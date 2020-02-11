@@ -34,7 +34,7 @@
         <view class="good-price">AUD${{item.price[0]}}</view>
         <view class="bottom"> 
           <view>约￥{{item.price[1]}}</view>
-          <image src="/images/goodslist/cart.png"></image>
+          <image src="/images/goodslist/cart.png" bindtap="addCart" data-id="{{item.id}}"></image>
         </view>
       </view>
     </view>
