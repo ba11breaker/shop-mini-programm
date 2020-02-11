@@ -106,12 +106,13 @@ Page({
   addCart: function(e) {
     const that = this;
     let cart = app.globalData.cart;
-    if(!cart.has(that.data.goodID)) {
-      cart.set(that.data.goodID, 1);
+    let goodID = parseInt(that.data.goodID)
+    if(!cart.has(goodID)) {
+      cart.set(goodID, 1);
     } else {
-      let preCount = cart.get(that.data.goodID);
+      let preCount = cart.get(goodID);
       preCount++;
-      cart.set(that.data.goodID, preCount);
+      cart.set(goodID, preCount);
     }
     app.globalData.cart = cart;
     console.log(app.globalData.cart);
