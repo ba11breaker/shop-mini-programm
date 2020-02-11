@@ -34,14 +34,21 @@ Page({
     const articlePac = await app.http({
       method: 'get',
       url: `${app.globalData.apiBaseUrl}/public/shop/found/blogs?searchBy=title&count=20&desc=DESC&orderBy=updated_at&pageNo=0`,
-      authorization: `Bearer ${app.globalData.token}`,
-      'x-api-key': app.globalData.master_code
+      header: {
+        from: `https://easyqshop.com/${app.globalData.domain}/explore`,
+        authorization: `Bearer ${app.globalData.token}`,
+        'x-api-key': app.globalData.master_code
+      }
     });
     const momentPac = await app.http({
       method: 'get',
       url: `${app.globalData.apiBaseUrl}/public/shop/found/moments?searchBy=title&count=20&desc=DESC&orderBy=updated_at&pageNo=0`,
-      authorization: `Bearer ${app.globalData.token}`,
-      'x-api-key': app.globalData.master_code
+      header: {
+        from: `https://easyqshop.com/${app.globalData.domain}/explore`,
+        authorization: `Bearer ${app.globalData.token}`,
+        'x-api-key': app.globalData.master_code
+      }
+      
     });
     let articles = [];
     let moments = [];
