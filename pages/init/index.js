@@ -137,10 +137,23 @@ Page({
         url: `${app.globalData.apiBaseUrl}/public/shop/found/blog-types`,
         header: {
           from: `https://easyqshop.com/${domain}/explore`,
-          authorization: `Bearer ${app.globalData.token}`
+          authorization: `Bearer ${app.globalData.token}`,
+          'x-api-key': app.globalData.master_code
         }
       });
       app.globalData.blogtypes = sectionsInfo.data.detail;
+
+      // 获取库存信息
+      const stockInfo = await app.http({
+        method: 'get',
+        url: `${app.globalData.apiBaseUrl}/public/shop/stockLinkage?count=22&pageNo=-1&desc=ASC&orderBy=name`,
+        header: {
+          from: `https://easyqshop.com/${domain}`,
+          authorization: `Bearer ${app.globalData.token}`,
+          'x-api-key': app.globalData.master_code
+        }
+      });
+      app.globalData.stock = stockInfo.data.detail;
 
       this.getColors();
 

@@ -29,6 +29,9 @@ Page({
     });
     // 设置精选栏目和媒体中心
     this.setSections();
+  },
+
+  onShow: async function () {
     // 获取文章和朋友圈
     const that = this;
     const articlePac = await app.http({
@@ -48,13 +51,13 @@ Page({
         authorization: `Bearer ${app.globalData.token}`,
         'x-api-key': app.globalData.master_code
       }
-      
+
     });
     let articles = [];
     let moments = [];
     let articlesInfo = articlePac.data.detail;
     let momentsIInfo = momentPac.data.detail;
-    for(var i = 0; i < articlesInfo.length; i++) {
+    for (var i = 0; i < articlesInfo.length; i++) {
       let date = that.parseDate(articlesInfo[i].updated_at);
       let title = articlesInfo[i].title;
       title = title.slice(0, 52);
@@ -71,9 +74,7 @@ Page({
       moments: moments
     });
     wx.hideToast();
-  },
 
-  onShow: function () {
     // 显示购物车红点
     if (app.globalData.cart.size > 0) {
       wx.showTabBarRedDot({
@@ -99,13 +100,13 @@ Page({
         sections.push({
           id: app.globalData.blogtypes[i].id,
           img_url: `${app.globalData.imagesApiAWSUrl}/${app.globalData.blogtypes[i].img_url}`,
-          name: app.globalData.blogtypes[i].tag_name
+          name: app.globalData.blogtypes[i].name
         });
       } else if (app.globalData.blogtypes[i].category == '媒体中心') {
         medias.push({
           id: app.globalData.blogtypes[i].id,
           img_url: `${app.globalData.imagesApiAWSUrl}/${app.globalData.blogtypes[i].img_url}`,
-          name: app.globalData.blogtypes[i].tag_name
+          name: app.globalData.blogtypes[i].name
         });
       }
     }

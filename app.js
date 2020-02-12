@@ -16,6 +16,7 @@ App({
     colors: [],
 
     blogtypes: [],
+    stock: [],
 
     cart: new Map(),
 

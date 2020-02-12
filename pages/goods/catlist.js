@@ -58,18 +58,21 @@ Page({
     let goods = [];
     let brands = new Map();
     let brandsActive = [];
-    for (var i = 0; i < goodInfo.length; i++) {
-      let images = JSON.parse(goodInfo[i].images);
-      let imageURL = encodeURIComponent(images[0].url);
-      goods.push({
-        id: goodInfo[i].id,
-        images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-        price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * currentRate * 100) / 100],
-        name: goodInfo[i].name,
-        brand: goodInfo[i].stock_brand,
-        isShow: true
-      })
-      brands.set(goodInfo[i].stock_brand, true); 
+    // catlist中当cat结果无时传回的goodInfo为undefined
+    if(goodInfo != undefined) {
+      for (var i = 0; i < goodInfo.length; i++) {
+        let images = JSON.parse(goodInfo[i].images);
+        let imageURL = encodeURIComponent(images[0].url);
+        goods.push({
+          id: goodInfo[i].id,
+          images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
+          price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * currentRate * 100) / 100],
+          name: goodInfo[i].name,
+          brand: goodInfo[i].stock_brand,
+          isShow: true
+        })
+        brands.set(goodInfo[i].stock_brand, true);
+      }
     }
     brands = [...brands];
     for (var i = 0; i < brands.length; i++) {

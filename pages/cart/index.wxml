@@ -1,2 +1,35 @@
 <!--pages/cart/index.wxml-->
+<view class="header" style="background-color:{{colors.primary}}">
+  <view>购物车</view>
+  <view class="admin-button" bindtap="onClickAdmin" data-id="{{mode}}"><text wx:if="{{mode=='normal'}}">管理</text><text wx:if="{{mode=='admin'}}">完成</text></view>
+</view>
+<view class="cart-container">
+  <view class="no-data" wx:if="{{cart.length==0}}">
+    <image src="/images/cart/empty.png"></image>
+  </view>
+  <view class="no-data text" wx:if="{{cart.length==0}}">
+    <view>购物车为空</view>
+  </view>
 
+  <view class="goods-container" wx:if="cart.length>0" wx:for="{{cartGoods}}" wx:key="id" wx:item="{{item}}">
+    <view class="good">
+      <view class="select-button">
+        <image wx:if="{{mode=='admin'}}" src="/images/cart/delete.png" bindtap="deleteGood" data-id="{{item.id}}"></image>
+        <image wx:if="{{mode=='normal'&&item.selected}}" src="/images/cart/selected.png" bindtap="releaseGood" data-id="{{item.id}}"></image>
+        <image wx:if="{{mode=='normal'&&!item.selected}}" src="/images/cart/notSelected.png" bindtap="selectGood" data-id="{{item.id}}"></image>
+      </view>
+      <view class="pic">
+        <image src="{{item.images}}"></image>
+      </view>
+      <view class="good-info">
+        <view class="title">{{item.name}}</view>
+        <view class="good-bar">
+          <view class="price">
+            <text class="price1">${{item.price[0]}}</text>
+            <text class="price2">(￥{{item.price[1]}})</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
