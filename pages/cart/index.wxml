@@ -26,9 +26,34 @@
         <view class="good-bar">
           <view class="price">
             <text class="price1">${{item.price[0]}}</text>
-            <text class="price2">(￥{{item.price[1]}})</text>
+            <text class="price2">(约￥{{item.price[1]}})</text>
+          </view>
+          <view class="amount">
+            <view bindtap="addOne" data-id="{{index}}"><image src="/images/cart/puls.png"></image></view>
+            <input value="{{cart[index][1]}}" type="number" bindinput="inputAmount" data-id="{{index}}" ></input>
+            <view bindtap="minusOne" data-id="{{index}}"><image src="/images/cart/minus.png"></image></view>
           </view>
         </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class="recommend-container">
+  <view class="header">
+    <image src="/images/cart/heart.png"></image>
+    <text>猜你喜欢</text>
+  </view>
+  <view class="goods">
+    <view class="good-box" wx:for="{{recommends}}" wx:key="id" wx:item="item">
+      <view class="pic"><image src="{{item.images}}"></image></view>
+      <view class="good-title"><view>{{item.name}}</view></view>
+      <view class="good-bar">
+        <view class="price">
+          <text class="price1">${{item.price[0]}}</text>
+          <text class="price2">￥(约{{item.price[1]}})</text>
+        </view>
+        <view class="icon"><image src="/images/goodslist/cart.png"></image></view>
       </view>
     </view>
   </view>

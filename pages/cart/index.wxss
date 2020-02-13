@@ -24,6 +24,7 @@ page{
 
 .cart-container{
   width: 100%;
+  margin-bottom: 10vh;
 }
 .cart-container .no-data{
   width:100%;
@@ -99,16 +100,131 @@ page{
 .good .good-info .good-bar{
   width: 100%;
   height: 6vh;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 .good .good-info .good-bar .price{
   width: 60%;
   height: 6vh;
 }
 .good .good-info .good-bar .price .price1{
-  font-size: 2.5vh;
+  font-size: 2.4vh;
   color:#ff5500;
 }
 .good .good-info .good-bar .price .price2{
   font-size: 2.3vh;
   color:#999999;
+  letter-spacing: -0.1vw;
+}
+.good .good-info .good-bar .amount{
+  width: 40%;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  margin-top: 1vh;
+}
+.good .good-info .good-bar .amount input{
+  width: 40%;
+  font-size: 2.8vh;
+  background-color: #e8e8ed;
+  text-align: center;
+  height: 5vh;
+  margin: 0 10rpx 0;
+}
+.good .good-info .good-bar .amount view{
+  text-align: center;
+  vertical-align: center;
+}
+.good .good-info .good-bar .amount view image{
+  width: 3vh;
+  height: 3vh;
+}
+
+.recommend-container{
+  background-color: #f9f9f9;
+  width: 100%;
+  border-radius: 6vw;
+}
+.recommend-container .header{
+  width: 100%;
+  height: 8vh;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 4vh 0 4vh;
+}
+.recommend-container .header image{
+  width: 4.5vh;
+  height: 4.5vh;
+}
+.recommend-container .header text{
+  font-size: 3.2vh;
+  margin-left: 2vw;
+}
+.recommend-container .goods{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.goods .good-box{
+  width: 46vw;
+  height: 52vw;
+  background-color: #fff;
+  margin-bottom: 3vw;
+}
+.goods .good-box .pic{
+  width:46vw;
+  height:32vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goods .good-box .pic image{
+  width:30vw;
+  height:30vw;
+}
+.goods .good-box .good-title{
+  width:46vw;
+  height: 12vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goods .good-box .good-title view{
+  width: 44vw;
+  height:12vw;
+  font-size: 3.5vw;
+  text-overflow: ellipsis;
+}
+.goods .good-box .good-bar{
+  width: 44vw;
+  height: 8vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.goods .good-box .good-bar .price{
+  margin-left: 1vw;
+  width: 34vw;
+  height: 8vw;
+}
+.price .price1{
+  color: #ff5500;
+  font-size: 3.6vw;
+}
+.price .price2{
+  font-size: 3.3vw;
+  color: #999999;
+}
+.goods .good-box .good-bar .icon{
+  height:7vw;
+  width:7vw;
+  margin-left: 2vw;
+}
+.goods .good-box .good-bar .icon image{
+  height:5.5vw;
+  width:5.5vw;
 }

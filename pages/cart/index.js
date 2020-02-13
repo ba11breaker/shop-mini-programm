@@ -79,7 +79,10 @@ Page({
       }
     }
     if (recommends.length > 90) {
-      recommends.slice(0, 90);
+      recommends = recommends.slice(0, 90);
+    }
+    if (recommends.length % 2 != 0) {
+      recommends = recommends.slice(0, recommends.length-1);
     }
     this.setData({
       recommends: recommends
@@ -137,7 +140,10 @@ Page({
       }
     }
     if(recommends.length > 90) {
-      recommends.slice(0, 90);
+      recommends = recommends.slice(0, 90);
+    }
+    if(recommends.length % 2 != 0) {
+      recommends = recommends.slice(0, recommends.length-1);
     }
     this.setData({
       recommends: recommends
@@ -275,5 +281,40 @@ Page({
         index: 3,
       })
     }
-  }
+  },
+
+  inputAmount: function(e) {
+    let id = parseInt(e.target.dataset.id);
+    let value = parseInt(e.detail.value);
+    let cart = this.data.cart;
+    cart[id][1] = value;
+    this.setData({
+      cart: cart
+    });
+    let cartMap = new Map(cart);
+    app.globalData.cart = cartMap;
+  },
+
+  addOne: function(e) {
+    let id = e.currentTarget.dataset.id;
+    let cart = this.data.cart;
+    cart[id][1]++;
+    this.setData({
+      cart: cart
+    });
+    let cartMap = new Map(cart);
+    app.globalData.cart = cartMap;
+  },
+   minusOne: function(e) {
+     let id = e.currentTarget.dataset.id;
+     let cart = this.data.cart;
+     if (cart[id][1] > 1) {
+       cart[id][1]--;
+     }
+     this.setData({
+       cart: cart
+     });
+     let cartMap = new Map(cart);
+     app.globalData.cart = cartMap;
+   }
 })
