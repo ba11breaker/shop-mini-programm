@@ -46,15 +46,35 @@
   </view>
   <view class="goods">
     <view class="good-box" wx:for="{{recommends}}" wx:key="id" wx:item="item">
-      <view class="pic"><image src="{{item.images}}"></image></view>
-      <view class="good-title"><view>{{item.name}}</view></view>
+      <view class="pic" bindtap="goGoodDetail" data-id="{{item.id}}"><image src="{{item.images}}"></image></view>
+      <view class="good-title" bindtap="goGoodDetail" data-id="{{item.id}}"><view>{{item.name}}</view></view>
       <view class="good-bar">
         <view class="price">
           <text class="price1">${{item.price[0]}}</text>
-          <text class="price2">￥(约{{item.price[1]}})</text>
+          <text class="price2">(￥约{{item.price[1]}})</text>
         </view>
-        <view class="icon"><image src="/images/goodslist/cart.png"></image></view>
+        <view class="icon"><image src="/images/goodslist/cart.png" bindtap="addCart" data-id="{{item.id}}"></image></view>
       </view>
     </view>
+  </view>
+</view>
+
+<view class="footer-box">
+  <view class="bar">
+    <view class="select-button">
+      <image wx:if="{{allSelected}}" src="/images/cart/selected.png" bindtap="releaseAll"></image>
+      <image wx:if="{{!allSelected}}" src="/images/cart/notSelected.png" bindtap="selectAll"></image>
+      <text>全选</text>
+    </view>
+    <view class="price-bar">
+      <view class="title">合计(不包含运费):</view>
+      <view class="price">
+        <text class="price1">AU${{totalPrice.aud}}</text>
+        <text class="price2">(约￥{{totalPrice.rmb}})</text>
+      </view>
+    </view>
+  </view>
+  <view class="submit-button">
+    <view class="button" style="background-color:{{colors.darkPrimary}}" bindtap="payNow"><text>结算</text></view>
   </view>
 </view>

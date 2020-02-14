@@ -16,9 +16,10 @@ Page({
     categorysSelected:{
       title: ''
     },
-    scrolltop: 0
+    scrolltop: 0,
+    categoryGoods: [],
   },
-  onLoad: function (e) {
+  onLoad: async function (e) {
     wx.showShareMenu({
       withShareTicket: true
     })
@@ -29,6 +30,13 @@ Page({
     this.setBanners();
     this.setHomeBrands();
     this.setCategories();
+
+    // 获取分类的商品数据
+    let categoryGoods = [];
+    let categories = this.data.categories;
+    for(var i = 0; i < categories.length; i++) {
+      
+    }
   },
 
   onShow: function () {
@@ -75,13 +83,8 @@ Page({
   setCategories(){
     const that = this;
     let categories = [];
-    let categoryName = '';
     categories = app.globalData.themes[6].body;
-    for(var i = 0; i < categories.length; i++){
-      if(i == 0){
-        categoryName = categories[i].title;
-      }
-    }
+    let categoryName = categories[0].title;
     this.setData({
       categories: categories,
       categorySelected:{
@@ -92,7 +95,6 @@ Page({
 
   onCategoryClick: function(e) {
     var that  = this;
-    console.log(e);
     var id = e.target.dataset.id;
     if(id == that.data.categorySelected.title){
       that.setData({
@@ -113,6 +115,7 @@ Page({
         },
         scrolltop: 0
       });
+      console.log(this.data.categorySelected);
     }
   }
 })

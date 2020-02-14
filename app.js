@@ -177,4 +177,12 @@ App({
       });
     });
   },
+
+  // 转化为金额格式
+  toMoney(num) {
+    num = num.toFixed(2);
+    num = parseFloat(num)
+    num = num.toLocaleString();
+    return num;
+  }
 })

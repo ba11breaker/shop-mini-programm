@@ -302,7 +302,6 @@
 
 .content-container{
   width: 100%;
-  height: 120vw;
   display: flex;
   background: #f2f2f2;
 }
