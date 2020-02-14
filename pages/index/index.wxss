@@ -302,20 +302,19 @@
 
 .content-container{
   width: 100%;
-  display: flex;
   background: #f2f2f2;
 }
 .category-container{
   width: 100%;
-  height: 120rpx;
+  height: 100rpx;
   background: #f2f2f2;
-  margin: 0rpx 15rpx 25rpx;
+  margin: 0rpx 0 10rpx;
 }
 .category-container .category{
   padding: 20rpx 30rpx;
   text-align: center;
   display: inline-block;
-  height:60rpx;
+  height:30rpx;
 }
 .category-container .category.active{
   border-bottom: 4rpx solid #646464;
@@ -327,7 +326,29 @@
   text-align: center;
   pointer-events: none;
 }
-
 .category-container .category .name.active{
   color: #646464;
+}
+.goods{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.goods .good-box{
+  width: 46vw;
+  height: 52vw;
+  background-color: #fff;
+  margin:0 2vw 3vw;
+}
+.goods .good-box .pic{
+  width:46vw;
+  height:32vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goods .good-box .pic image{
+  width:30vw;
+  height:30vw;
 }

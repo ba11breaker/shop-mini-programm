@@ -52,8 +52,12 @@
     <scroll-view class="category-container" scroll-x="true" scroll-with-animation="true">
       <view class="category {{categorySelected.title==category.title?'active':''}}" wx:for="{{categories}}" wx:for-item="category" wx:key="title" data-id="{{category.title}}" bindtap="onCategoryClick">
         <view class="name {{categorySelected.title==category.title?'active':''}}">{{category.title}}</view>
-        <view class="name {{categorySelected.title==category.title?'active':''}}">{{category.description}}</view>
       </view>
     </scroll-view>
+    <view class="goods" wx:for="{{categoryGoods}}" wx:for-item="goods" wx:if="{{categorySelected.title==goods.title}}" wx:key="id">
+      <view class="good-box" wx:for="{{goods.recommends}}" wx:key="id">
+        <view class="pic" bindtap="goGoodDetail" data-id="{{item.id}}"><image src="{{item.images}}"></image></view>
+      </view> 
+    </view>
   </view>
 </view>

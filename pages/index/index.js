@@ -13,7 +13,7 @@ Page({
     homeBrands: [],
     
     categories: [],
-    categorysSelected:{
+    categorySelected:{
       title: ''
     },
     scrolltop: 0,
@@ -35,8 +35,30 @@ Page({
     let categoryGoods = [];
     let categories = this.data.categories;
     for(var i = 0; i < categories.length; i++) {
-      
+      var search_key = categories[i].search_key;
+      search_key = encodeURIComponent(search_key);
+      var goodsInfo = await app.http({
+        method: 'get',
+        url: `${app.globalData.apiBaseUrl}/public/shop/search?keywords=${search_key}`,
+        header: {
+          from: `https://easyqshop.com/${app.globalData.domain}`,
+          authorization: `Bearer ${app.globalData.token}`,
+          'x-api-key': app.globalData.master_code
+        }
+      });
+      goodsInfo = goodsInfo.data.detail;
+      let goods = [];
+      for(var j = 0; j < goodsInfo.length; j++) {
+        goods.push(this.parseGood(goodsInfo[j]));
+      }
+      categoryGoods.push({
+        title: categories[i].title,
+        recommends: goods
+      });
     }
+    this.setData({
+      categoryGoods: categoryGoods
+    });
   },
 
   onShow: function () {
@@ -117,5 +139,23 @@ Page({
       });
       console.log(this.data.categorySelected);
     }
+  },
+
+  // 转换商品信息
+  parseGood(good) {
+    let currentRate = this.data.currentRate;
+
+    let id = good.id;
+    let name = good.name;
+    let images = JSON.parse(good.images);
+    let imageURL = encodeURIComponent(images[0].url);
+    let price = [Math.round(good.price * 100) / 100, Math.round(good.price * currentRate * 100) / 100];
+    let goodInfo = {
+      id: id,
+      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
+      price: price,
+      name: name,
+    }
+    return goodInfo;
   }
 })
