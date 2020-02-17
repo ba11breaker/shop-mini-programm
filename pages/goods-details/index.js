@@ -1,6 +1,6 @@
 // pages/goods-details/index.js
-const app = getApp();
 const WxParse = require('../../wxParse/wxParse.js');
+const app = getApp();
 
 Page({
 

@@ -84,10 +84,17 @@
   width:100%;
   margin-top:10rpx;
   overflow: hidden;
+  display: block;
+  text-align: center;
+}
+.category-list text{
+  font-size:24rpx;
+  color: #444444;
 }
 .category-imgbox{
-  width:190rpx;
-  height:190rpx;
+  width:120rpx;
+  height:120rpx;
+  opacity: 0.6;
 }
 .category-title{
   font-size: 24rpx;
@@ -175,7 +182,7 @@
 }
 .brands-box{
   width: 339rpx;
-  height: 339rpx;
+  height: 150rpx;
   background-color: #fff;
   overflow: hidden;
   margin-bottom: 24rpx;
@@ -183,12 +190,12 @@
 }
 .brands-box .img-box{
   width: 339rpx;
-  height: 339rpx;
+  height: 150rpx;
   overflow: hidden;
 }
 .brands-box .img-box image{
    width: 339rpx;
-   height: 339rpx;
+   height: 150rpx;
 }
 
 .pos-fiexd{

@@ -98,19 +98,16 @@ page,view,image,input {
 
 .goods-container .box1{
   display: flex;
-  justify-content: space-between;  
   flex-wrap:wrap;
-  align-content: flex-start;
   background: #fff;
   padding:5rpx;
 }
 
 .goods-container .box1 .goods {
-  width: 170rpx;
+  width: 33%;
   height: 170rpx;
   background-color: #fff;
   overflow: hidden;
-  margin: auto;
 }
 
 .goods-container .box1 .goods .pic {

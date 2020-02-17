@@ -66,7 +66,12 @@ Page({
       id: 0,
       brands: []
     });
-    let info = app.globalData.themes[4].body;
+    let info = [];
+    for (var i = 0; i < app.globalData.themes.length; i++) {
+      if (app.globalData.themes[i].type == 'leftMenu') {
+        info = app.globalData.themes[i].body;
+      }
+    }
     for(var i = 0; i < info.length; i++) {
       categories.push({
         name: info[i].name,
@@ -100,7 +105,12 @@ Page({
         });
       }
     }else{
-      brandsInfo = app.globalData.themes[4].body[that.data.categorySelected.id - 1].sub;
+      //brandsInfo = app.globalData.themes[4].body[that.data.categorySelected.id - 1].sub;
+      for(var i = 0; i < app.globalData.themes.length; i++) {
+        if (app.globalData.themes[i].type == 'leftMenu'){
+          brandsInfo = app.globalData.themes[i].body[that.data.categorySelected.id - 1].sub;
+        }
+      }
       for (var i = 0; i < brandsInfo.length; i++) {
         currentBrands.push({
           id: i,
@@ -131,6 +141,16 @@ Page({
       let count = 0;
       for (var i = 0; i < currentBrands.length; i++){
         temp[count++] = currentBrands[i];
+        if(i == currentBrands.length-1){
+          let box = [];
+          for(var j = 0; j < count; j++){
+            box.push(temp[j]);
+          }
+          currentBrandsBox.push({
+            box: box
+          });
+          break;
+        }
         if(count === 3){
           currentBrandsBox.push({
             box: [temp[0], temp[1], temp[2]]

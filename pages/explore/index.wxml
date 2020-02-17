@@ -42,4 +42,9 @@
       <view class="img-box"><image src="{{item.img}}"></image></view>
     </view>
   </scroll-view>
+  <scroll-view class="moment-container" scroll-y="true" scroll-top="0" wx:if="{{typeSelected=='moment'}}">
+    <view class="box" wx:for="{{moments}}" wx:for-item="item" wx:key="id">
+
+    </view>
+  </scroll-view>
 </view>

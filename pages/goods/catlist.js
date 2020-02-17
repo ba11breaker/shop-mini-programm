@@ -17,7 +17,7 @@ Page({
     sortedByPrice: false,
     sortedByTime: false,
 
-    currentRate: 4.72
+    currentRate: 4.723454
   },
 
   /**

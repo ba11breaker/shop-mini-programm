@@ -12,7 +12,8 @@ Page({
     typeSelected: 'article', // 'article', moment
 
     articles: [],
-    moments: []
+    moments: [],
+    stock: new Map()
   },
 
   /**
@@ -29,6 +30,10 @@ Page({
     });
     // 设置精选栏目和媒体中心
     this.setSections();
+
+    this.setData({
+      stock: app.globalData.stock
+    })
   },
 
   onShow: async function () {
@@ -51,12 +56,12 @@ Page({
         authorization: `Bearer ${app.globalData.token}`,
         'x-api-key': app.globalData.master_code
       }
-
     });
     let articles = [];
     let moments = [];
     let articlesInfo = articlePac.data.detail;
-    let momentsIInfo = momentPac.data.detail;
+    let momentsInfo = momentPac.data.detail;
+    // 获取articles信息
     for (var i = 0; i < articlesInfo.length; i++) {
       let date = that.parseDate(articlesInfo[i].updated_at);
       let title = articlesInfo[i].title;
@@ -68,6 +73,15 @@ Page({
         img: `${app.globalData.imagesApiAWSUrl}/${articlesInfo[i].front_image_key}`,
         date: date
       });
+    }
+    // 获取moments信息
+    let stock = this.data.stock;
+    let stockMap = new Map();
+    for (var i = 0; i < stock.length; i++) {
+      stockMap.set(parseInt(stock[i].stock_id), stock[i]);
+    }
+    for(var i = 0; i < momentsInfo.length; i++){
+      moments.push(this.parseMoment(momentsInfo[i], stockMap));
     }
     that.setData({
       articles: articles,
@@ -173,5 +187,66 @@ Page({
       case '23': time[0] = '21'; break;
     }
     return `${day[2]} ${day[1]} ${day[0]} ${time[0]}:${time[1]}`;
+  },
+
+  // 转换moment信息
+  parseMoment(momentInfo, stockMap){
+    let id = momentInfo.id;
+    let stock_id = momentInfo.stock_id;
+    let date = this.parseDate(momentInfo.updated_at);
+    let images = JSON.parse(momentInfo.images);
+    for(var i = 0; i < images.length; i++){
+      images[i] = `${app.globalData.imagesApiAWSUrl}/${images[i].url}`
+    }
+    let user_name = momentInfo.user_name;
+    let user_photo = `${app.globalData.imagesApiAWSUrl}/${momentInfo.user_photo}`;
+    let content = momentInfo.content;
+    content = this.parseContent(content);
+    let stock_good = null;
+    if(momentInfo.stock_id){
+      let good = stockMap.get(momentInfo.stock_id);
+      stock_good = this.parseGood(good);
+    }
+    return{
+      id: id,
+      stock_id: stock_id,
+      date: date,
+      iamges: images,
+      user_name: user_name,
+      user_photo: user_photo,
+      content: content,
+      stock_good: stock_good
+    }
+  },
+
+  // 转换商品信息
+  parseGood(good) {
+    let id = good.id;
+    let name = good.name;
+    let images = JSON.parse(good.images);
+    let imageURL = encodeURIComponent(images[0].url);
+    let price = [Math.round(good.price * 100) / 100, Math.round((good.price+10) * 100) / 100];
+    let recommendGood = {
+      id: id,
+      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
+      price: price,
+      name: name,
+      selected: true
+    }
+    return recommendGood;
+  },
+
+  parseContent(string) {
+    let content = string.split('</p>');
+    for(var i = 0; i < content.length; i++){
+      content[i] = content[i].replace('<p>', '');
+      content[i] = content[i].replace('&nbsp;', ' ');
+      content[i] = content[i].replace('&ldquo;', '“');
+      content[i] = content[i].replace('&rdquo;', '”');
+      content[i] = content[i].replace('&lsquo;', '‘');
+      content[i] = content[i].replace('&rsquo;', '’');
+    }
+    content = content.slice(0, content.length - 1);
+    return content;
   }
 })

@@ -19,7 +19,10 @@ Page({
     scrolltop: 0,
     categoryGoods: [],
 
-    currentRate: 4.72
+    currentRate: 4.723454,
+
+    skin: {},
+    icons: {}
   },
   onLoad: async function (e) {
     wx.showShareMenu({
@@ -32,6 +35,8 @@ Page({
     this.setBanners();
     this.setHomeBrands();
     this.setCategories();
+    this.setSkin();
+    this.setIcons();
 
     // 获取分类的商品数据
     let categoryGoods = [];
@@ -89,7 +94,14 @@ Page({
   // Get the banners info
   setBanners() {
     const that = this;
-    let bannersInfo = app.globalData.themes[2].body;
+    let bannersInfo = [];
+    //let bannersInfo = app.globalData.themes[2].body;
+    for (var i = 0; i < app.globalData.themes.length; i++) {
+      if (app.globalData.themes[i].type == 'homeSliders'){
+        bannersInfo = app.globalData.themes[i].body;
+        break;
+      }
+    }
     for(var i = 0; i < bannersInfo.length; i++){
       bannersInfo[i].imageUrl = `${app.globalData.imagesApiBaseUrl}/${bannersInfo[i].imageUrl}`;
     }
@@ -100,7 +112,14 @@ Page({
   // Get the recommend brands info in index
   setHomeBrands() {
     const that = this;
-    let brandsInfo = app.globalData.themes[3].body;
+    //let brandsInfo = app.globalData.themes[3].body;
+    let brandsInfo = [];
+    for (var i = 0; i < app.globalData.themes.length; i++) {
+      if (app.globalData.themes[i].type == 'homeBrands') {
+        brandsInfo = app.globalData.themes[i].body;
+        break;
+      }
+    }
     //console.log(brandsInfo);
     for(var i = 0; i < brandsInfo.length; i++){
       brandsInfo[i].imageUrl = `${app.globalData.imagesApiBaseUrl}/${brandsInfo[i].imageUrl}`;
@@ -113,13 +132,48 @@ Page({
   setCategories(){
     const that = this;
     let categories = [];
-    categories = app.globalData.themes[6].body;
+    //categories = app.globalData.themes[6].body;
+    for (var i = 0; i < app.globalData.themes.length; i++) {
+      if (app.globalData.themes[i].type == 'homeRecommands') {
+        categories = app.globalData.themes[i].body;
+        break;
+      }
+    }
     let categoryName = categories[0].title;
     this.setData({
       categories: categories,
       categorySelected:{
         title: categoryName
       }
+    });
+  },
+
+  // 获取themes中的skin
+  setSkin() {
+    const that = this;
+    let skin = {};
+    for(var i = 0; i < app.globalData.themes.length; i++) {
+      if(app.globalData.themes[i].type == 'skins'){
+        skin = app.globalData.themes[i].body;
+        break;
+      }
+    }
+    this.setData({
+      skin: skin
+    });
+  },
+
+  // 设置icon的url
+  setIcons() {
+    const that = this;
+    let icons = {
+      all: `https://qpanda-themes.s3-ap-southeast-2.amazonaws.com/${that.data.skin.value}/icon-all.svg`,
+      special: `https://qpanda-themes.s3-ap-southeast-2.amazonaws.com/${that.data.skin.value}/icon-special.svg`,
+      logistics: `https://qpanda-themes.s3-ap-southeast-2.amazonaws.com/${that.data.skin.value}/icon-logistics.svg`,
+      id: `https://qpanda-themes.s3-ap-southeast-2.amazonaws.com/${that.data.skin.value}/icon-id-upload.svg`
+    }
+    this.setData({
+      icons: icons
     });
   },
 
@@ -165,5 +219,46 @@ Page({
       name: name,
     }
     return goodInfo;
-  }
+  },
+
+  goGoodDetail: function (e) {
+    let goodID = e.currentTarget.dataset.id;
+    wx.navigateTo({
+      url: `/pages/goods-details/index?goodID=${goodID}`
+    })
+  },
+
+  addCart: function (e) {
+    const that = this;
+    let cart = app.globalData.cart;
+    let id = e.target.dataset.id;
+    if (!cart.has(id)) {
+      cart.set(id, 1);
+    } else {
+      let preCount = cart.get(id);
+      preCount++;
+      cart.set(id, preCount);
+    }
+    app.globalData.cart = cart;
+    console.log(app.globalData.cart);
+    wx.showToast({
+      title: '添加成功',
+      icon: 'success',
+      duration: 700
+    });
+    // 显示购物车红点
+    if (app.globalData.cart.size > 0) {
+      wx.showTabBarRedDot({
+        index: 3,
+      })
+      wx.setTabBarBadge({
+        index: 3,
+        text: app.globalData.cart.size.toString()
+      })
+    } else {
+      wx.hideTabBarRedDot({
+        index: 3,
+      })
+    }
+  },
 })

@@ -14,23 +14,27 @@
 <view class="category-box">
   <view class="category-list">
     <view class="category-column" bindtap="tabClick">
-     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/all.jpg"></image>
+     <image mode="aspectFill" class="category-imgbox" src="{{icons.all}}"></image>
     </view>
+    <text>全部商品</text>
   </view>
   <view class="category-list">
     <view class="category-column" bindtap="tabClick">
-     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/special.jpg"></image>
+     <image mode="aspectFill" class="category-imgbox" src="{{icons.special}}"></image>
     </view>
+    <text>特惠专区</text>
   </view>
   <view class="category-list">
     <view class="category-column" bindtap="tabClick">
-     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/check.jpg"></image>
+     <image mode="aspectFill" class="category-imgbox" src="{{icons.logistics}}"></image>
     </view>
+    <text>物流查询</text>
   </view>
   <view class="category-list">
     <view class="category-column" bindtap="tabClick">
-     <image mode="aspectFill" class="category-imgbox" src="https://d3ink3airedldn.cloudfront.net/idcard.jpg"></image>
+     <image mode="aspectFill" class="category-imgbox" src="{{icons.id}}"></image>
     </view>
+    <text>证件上传</text>
   </view>
 </view>
 <!--main container-->
