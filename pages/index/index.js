@@ -18,6 +18,8 @@ Page({
     },
     scrolltop: 0,
     categoryGoods: [],
+
+    currentRate: 4.72
   },
   onLoad: async function (e) {
     wx.showShareMenu({
@@ -50,6 +52,12 @@ Page({
       let goods = [];
       for(var j = 0; j < goodsInfo.length; j++) {
         goods.push(this.parseGood(goodsInfo[j]));
+      }
+      if(goods.length > 16){
+        goods = goods.slice(0, 16);
+      }
+      if(goods.length % 2 != 0){
+        goods = goods.slice(0, goods.length-1);
       }
       categoryGoods.push({
         title: categories[i].title,

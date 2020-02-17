@@ -57,6 +57,14 @@
     <view class="goods" wx:for="{{categoryGoods}}" wx:for-item="goods" wx:if="{{categorySelected.title==goods.title}}" wx:key="id">
       <view class="good-box" wx:for="{{goods.recommends}}" wx:key="id">
         <view class="pic" bindtap="goGoodDetail" data-id="{{item.id}}"><image src="{{item.images}}"></image></view>
+        <view class="good-title" bidntap="goGoodDetail" data-id="{{item.id}}"><view>{{item.name}}</view></view>
+        <view class="good-bar">
+          <view class="price">
+            <text class="price1">${{item.price[0]}}</text>
+            <text class="price2">(￥约{{item.price[1]}})</text>
+          </view>
+          <view class="icon"><image bindtap="addCart" data-id="{{item.id}}" src="/images/goodslist/cart.png"></image></view>
+        </view>
       </view> 
     </view>
   </view>

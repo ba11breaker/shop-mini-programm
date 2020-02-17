@@ -212,11 +212,11 @@ page{
   width: 34vw;
   height: 8vw;
 }
-.price .price1{
+.good-bar .price .price1{
   color: #ff5500;
   font-size: 3.6vw;
 }
-.price .price2{
+.good-bar .price .price2{
   font-size: 3.3vw;
   color: #999999;
 }

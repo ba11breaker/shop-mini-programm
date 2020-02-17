@@ -14,7 +14,7 @@ Page({
     stock: [],
     cartGoods: [],
 
-    currentRate: 0,
+    currentRate: 4.72,
 
     colors: [],
 
@@ -39,12 +39,11 @@ Page({
       icon: 'loading',
       duration: 10 * 1000
     });
-    let rateInfo = await app.getCurrentRate();
-    let currentRate = parseFloat(rateInfo.data.detail.rate);
+    // let rateInfo = await app.getCurrentRate();
+    // let currentRate = parseFloat(rateInfo.data.detail.rate);
     let colors = JSON.parse(app.globalData.colors);
     this.setData({
       stock: app.globalData.stock,
-      currentRate: currentRate,
       colors: colors
     });
 
@@ -84,8 +83,8 @@ Page({
         recommends.push(this.parseGood(this.data.stock[i]));
       }
     }
-    if (recommends.length > 90) {
-      recommends = recommends.slice(0, 90);
+    if (recommends.length > 50) {
+      recommends = recommends.slice(0, 50);
     }
     if (recommends.length % 2 != 0) {
       recommends = recommends.slice(0, recommends.length-1);
@@ -150,8 +149,8 @@ Page({
         recommends.push(this.parseGood(this.data.stock[i]));
       }
     }
-    if(recommends.length > 90) {
-      recommends = recommends.slice(0, 90);
+    if(recommends.length > 50) {
+      recommends = recommends.slice(0, 50);
     }
     if(recommends.length % 2 != 0) {
       recommends = recommends.slice(0, recommends.length-1);

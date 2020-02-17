@@ -11,6 +11,7 @@
 .search input {
   display: block;
   box-sizing: border-box;
+  opacity: 0.8;
   background: #fff;
   border: 1rpx solid #e3e3e3;
   width: 700rpx;
@@ -332,14 +333,14 @@
 .goods{
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
 }
 .goods .good-box{
   width: 46vw;
   height: 52vw;
   background-color: #fff;
-  margin:0 2vw 3vw;
+  margin-bottom: 3vw;
 }
 .goods .good-box .pic{
   width:46vw;
@@ -351,4 +352,46 @@
 .goods .good-box .pic image{
   width:30vw;
   height:30vw;
+}
+.goods .good-box .good-title {
+  width: 46vw;
+  height: 12vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.goods .good-box .good-title view{
+  width: 44vw;
+  height: 12vw;
+  font-size: 3.5vw;
+  text-overflow: ellipsis;
+}
+.goods .good-box .good-bar{
+  width: 44vw;
+  height: 8vw;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.goods .good-box .good-bar .price{
+  margin-left: 1vw;
+  width: 34vw;
+  height: 8vw;
+}
+.price .price1{
+  color: #ff5500;
+  font-size:3.6vw;
+}
+.price .price2{
+  color: #999999;
+  font-size: 3.3vw;
+}
+.goods .good-box .good-bar .icon{
+  height: 7vw;
+  width:7vw;
+  margin-left:2vw;
+}
+.goods .good-box .good-bar .icon image{
+  height: 5.5vw;
+  width: 5.5vw;
 }

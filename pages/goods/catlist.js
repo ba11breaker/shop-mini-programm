@@ -17,7 +17,7 @@ Page({
     sortedByPrice: false,
     sortedByTime: false,
 
-    currentRate: 0
+    currentRate: 4.72
   },
 
   /**
@@ -51,8 +51,8 @@ Page({
       }
     });
 
-    let rateInfo = await app.getCurrentRate();  //获取汇率信息
-    let currentRate = parseFloat(rateInfo.data.detail.rate);
+    // let rateInfo = await app.getCurrentRate();  //获取汇率信息
+    // let currentRate = parseFloat(rateInfo.data.detail.rate);
 
     let goodInfo = goodsInfo.data.detail;
     let goods = [];
@@ -66,7 +66,7 @@ Page({
         goods.push({
           id: goodInfo[i].id,
           images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-          price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * currentRate * 100) / 100],
+          price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * this.data.currentRate * 100) / 100],
           name: goodInfo[i].name,
           brand: goodInfo[i].stock_brand,
           isShow: true
@@ -80,7 +80,7 @@ Page({
     }
     this.setData({
       goods: goods,
-      currentRate: currentRate,
+      //currentRate: currentRate,
       brands: brands,
       brandsActive: brandsActive
     });
