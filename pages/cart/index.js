@@ -1,5 +1,7 @@
 // pages/cart/index.js
 const app = getApp();
+const util = require('../../utils/util.js');
+const _cart = require('../../utils/cart.js');
 
 Page({
 
@@ -44,55 +46,12 @@ Page({
     let colors = JSON.parse(app.globalData.colors);
     this.setData({
       stock: app.globalData.stock,
-      colors: colors
+      colors: colors,
+      cart: [...app.globalData.cart]
     });
-
-
+   
     // 获取推荐的商品
-    let cart = app.globalData.cart;
-    cart = [...cart];
-    this.setData({
-      cart: cart
-    })
-    let ids = [];
-    for (var i = 0; i < this.data.cart.length; i++) {
-      ids.push(this.data.cart[i][0]);
-    }
-    let recommends = [];
-    if (this.data.cart.length > 0) {
-      const recommendsPac = await app.http({
-        method: 'post',
-        url: `${app.globalData.apiBaseUrl}/public/shop/search/recommend`,
-        data: {
-          payload: {
-            ids: ids
-          }
-        },
-        header: {
-          from: `https://easyqshop.com/${app.globalData.domain}/cart`,
-          authorization: `Bearer ${app.globalData.token}`,
-          'x-api-key': app.globalData.master_code
-        }
-      });
-      let recommendsInfo = recommendsPac.data.detail;
-      for (var i = 0; i < recommendsInfo.length; i++) {
-        recommends.push(this.parseGood(recommendsInfo[i]));
-      }
-    } else {
-      for (var i = 0; i < this.data.stock.length; i++) {
-        recommends.push(this.parseGood(this.data.stock[i]));
-      }
-    }
-    if (recommends.length > 50) {
-      recommends = recommends.slice(0, 50);
-    }
-    if (recommends.length % 2 != 0) {
-      recommends = recommends.slice(0, recommends.length-1);
-    }
-    this.setData({
-      recommends: recommends
-    });
-
+    this.fetchRecommends();
     // 提取购物车信息
     this.getCartGoods();
     // 设置总价
@@ -111,11 +70,6 @@ Page({
       cart: cart,
       mode: 'normal'
     })
-    let ids = [];
-    for(var i = 0; i < this.data.cart.length; i++) {
-      ids.push(this.data.cart[i][0]);
-    }
-    console.log(ids);
 
     // 提取购物车信息
     this.getCartGoods();
@@ -124,73 +78,55 @@ Page({
 
 
     // 获取推荐的商品
-    let recommends = [];
-    if(this.data.cart.length > 0) {
-      const recommendsPac = await app.http({
-        method: 'post',
-        url: `${app.globalData.apiBaseUrl}/public/shop/search/recommend`,
-        data: {
-          payload: {
-            ids: ids
-          }
-        },
-        header: {
-          from: `https://easyqshop.com/${app.globalData.domain}/cart`,
-          authorization: `Bearer ${app.globalData.token}`,
-          'x-api-key': app.globalData.master_code
-        }
-      });
-      let recommendsInfo = recommendsPac.data.detail;
-      for(var i = 0; i < recommendsInfo.length; i++){
-        recommends.push(this.parseGood(recommendsInfo[i]));
-      }
-    }else {
-      for(var i = 0; i < this.data.stock.length; i++){
-        recommends.push(this.parseGood(this.data.stock[i]));
-      }
-    }
-    if(recommends.length > 50) {
-      recommends = recommends.slice(0, 50);
-    }
-    if(recommends.length % 2 != 0) {
-      recommends = recommends.slice(0, recommends.length-1);
-    }
-    this.setData({
-      recommends: recommends
-    });
-
+    this.fetchRecommends();
     // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    _cart.updateBadge();
   },
 
-  parseGood(good) {
-    let currentRate = this.data.currentRate;
-
-    let id = good.id;
-    let name = good.name;
-    let images = JSON.parse(good.images);
-    let imageURL = encodeURIComponent(images[0].url);
-    let price = [Math.round(good.price * 100) / 100, Math.round(good.price * currentRate * 100) / 100];
-    let recommendGood = {
-      id: id,
-      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-      price: price,
-      name: name,
-      selected: true
+  // 获取推荐商品
+  async fetchRecommends() {
+    try{
+      let ids = [];
+      for (var i = 0; i < this.data.cart.length; i++) {
+        ids.push(this.data.cart[i][0]);
+      }
+      let recommends = [];
+      if (this.data.cart.length > 0) {
+        const recommendsPac = await app.http({
+          method: 'post',
+          url: `${app.globalData.apiBaseUrl}/public/shop/search/recommend`,
+          data: {
+            payload: {
+              ids: ids
+            }
+          },
+          header: {
+            from: `https://easyqshop.com/${app.globalData.domain}/cart`,
+            authorization: `Bearer ${app.globalData.token}`,
+            'x-api-key': app.globalData.master_code
+          }
+        });
+        let recommendsInfo = recommendsPac.data.detail;
+        for (var i = 0; i < recommendsInfo.length; i++) {
+          recommends.push(util.parseGood(recommendsInfo[i]));
+        }
+      } else {
+        for (var i = 0; i < this.data.stock.length; i++) {
+          recommends.push(util.parseGood(this.data.stock[i]));
+        }
+      }
+      if (recommends.length > 50) {
+        recommends = recommends.slice(0, 50);
+      }
+      if (recommends.length % 2 != 0) {
+        recommends = recommends.slice(0, recommends.length - 1);
+      }
+      this.setData({
+        recommends: recommends
+      });
+    }catch (error) {
+      console.error("无法推荐商品", error);
     }
-    return recommendGood;
   },
 
   getCartGoods() {
@@ -201,7 +137,7 @@ Page({
     }
     for(var i = 0; i < this.data.cart.length; i++){
       if(stockMap.has(this.data.cart[i][0])) {
-        cartGoods.push(this.parseGood(stockMap.get(this.data.cart[i][0])));
+        cartGoods.push(util.parseGood(stockMap.get(this.data.cart[i][0])));
       }
     }
     this.setData({
@@ -268,45 +204,19 @@ Page({
   // 从购物车中删除商品
   deleteGood: function(e) {
     let id = e.target.dataset.id;
-    let cartGoods = this.data.cartGoods;
-    let cart = this.data.cart;
-    let index = -1;
-    for (var i = 0; i < cartGoods.length; i++) {
-      if (cartGoods[i].id == id) {
-        index = i;
-        break;
-      }
-    }
-    cartGoods.splice(index, 1);
-    cart.splice(index, 1);
-    this.setData({
-      cartGoods: cartGoods,
-      cart: cart
-    });
-    cart = new Map(cart);
-    app.globalData.cart = cart;
+    _cart.remove(id);
     if(app.globalData.cart.size == 0) {
       this.setData({
         mode: 'normal'
       });
     }
-
-    // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
-
-    // 设置商品总价
+    // 设置本页面购物车
+    this.setData({
+      cart: [...app.globalData.cart]
+    })
+    // 提取购物车信息
+    this.getCartGoods();
+    // 设置总价
     this.setTotalPrice();
   },
 
@@ -318,11 +228,11 @@ Page({
     }
     let cart = this.data.cart;
     cart[id][1] = value;
-    this.setData({
-      cart: cart
-    });
     let cartMap = new Map(cart);
     app.globalData.cart = cartMap;
+
+    // 设置缓存
+    _cart.setStorage();
 
     // 设置商品总价
     this.setTotalPrice();
@@ -337,7 +247,8 @@ Page({
     });
     let cartMap = new Map(cart);
     app.globalData.cart = cartMap;
-
+    // 设置缓存
+    _cart.setStorage();
     // 设置商品总价
     this.setTotalPrice();
   },
@@ -353,7 +264,8 @@ Page({
      });
      let cartMap = new Map(cart);
      app.globalData.cart = cartMap;
-
+     // 设置缓存
+     _cart.setStorage();
      // 设置商品总价
      this.setTotalPrice();
   },
@@ -417,46 +329,16 @@ Page({
   },
 
   addCart: function(e) {
-    const that = this;
-    let cart = app.globalData.cart;
     let id = e.target.dataset.id;
-    if (!cart.has(id)) {
-      cart.set(id, 1);
-    } else {
-      let preCount = cart.get(id);
-      preCount++;
-      cart.set(id, preCount);
-    }
-    app.globalData.cart = cart;
-    console.log(app.globalData.cart);
-    wx.showToast({
-      title: '添加成功',
-      icon: 'success',
-      duration: 700
-    });
+    _cart.add(id);
     // 设置本页面购物车
-    cart = [...cart];
     this.setData({
-      cart: cart
+      cart: [...app.globalData.cart]
     })
     // 提取购物车信息
     this.getCartGoods();
     // 设置总价
     this.setTotalPrice();
-    // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
   },
 
   payNow: function(e) {
@@ -467,5 +349,8 @@ Page({
         duration: 2000
       })
     }
+    wx.navigateTo({
+      url: '/pages/checkout/index',
+    })
   }
 })

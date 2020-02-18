@@ -1,5 +1,7 @@
 // pages/goods/list.js
 const app = getApp();
+const util = require('../../utils/util.js')
+const _cart = require('../../utils/cart.js')
 
 Page({
 
@@ -54,14 +56,7 @@ Page({
     let goodInfo = goodsInfo.data.detail;
     let goods = [];
     for(var i = 0; i < goodInfo.length; i++){
-      let images = JSON.parse(goodInfo[i].images);
-      let imageURL = encodeURIComponent(images[0].url);
-      goods.push({
-        id : goodInfo[i].id,
-        images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-        price: [Math.round(goodInfo[i].price * 100) / 100, Math.round(goodInfo[i].price * this.data.currentRate * 100) / 100],
-        name: goodInfo[i].name
-      });
+      goods.push(util.parseGood(goodInfo[i]));
     }
     this.setData({
       goods: goods,
@@ -144,22 +139,8 @@ Page({
   },
 
   addCart: function (e) {
-    const that = this;
-    let cart = app.globalData.cart;
     let id = e.target.dataset.id;
-    if (!cart.has(id)) {
-      cart.set(id, 1);
-    } else {
-      let preCount = cart.get(id);
-      preCount++;
-      cart.set(id, preCount);
-    }
-    app.globalData.cart = cart;
+    _cart.add(id);
     console.log(app.globalData.cart);
-    wx.showToast({
-      title: '添加成功',
-      icon: 'success',
-      duration: 700
-    });
   }
 })

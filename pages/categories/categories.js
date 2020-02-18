@@ -1,6 +1,7 @@
 // pages/categories/categories.js
 //获取应用实例
 const app = getApp()
+const _cart = require('../../utils/cart.js')
 
 Page({
 
@@ -37,19 +38,7 @@ Page({
 
   onShow: function () {
     // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      }) 
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    _cart.updateBadge();
   },
 
   /**

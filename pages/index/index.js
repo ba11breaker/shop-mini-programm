@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const util = require('../../utils/util')
+const _cart = require('../../utils/cart')
 
 Page({
   data: {
@@ -56,7 +58,7 @@ Page({
       goodsInfo = goodsInfo.data.detail;
       let goods = [];
       for(var j = 0; j < goodsInfo.length; j++) {
-        goods.push(this.parseGood(goodsInfo[j]));
+        goods.push(util.parseGood(goodsInfo[j]));
       }
       if(goods.length > 16){
         goods = goods.slice(0, 16);
@@ -76,19 +78,7 @@ Page({
 
   onShow: function () {
     // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    _cart.updateBadge();
   },
 
   // Get the banners info
@@ -203,24 +193,6 @@ Page({
     }
   },
 
-  // 转换商品信息
-  parseGood(good) {
-    let currentRate = this.data.currentRate;
-
-    let id = good.id;
-    let name = good.name;
-    let images = JSON.parse(good.images);
-    let imageURL = encodeURIComponent(images[0].url);
-    let price = [Math.round(good.price * 100) / 100, Math.round(good.price * currentRate * 100) / 100];
-    let goodInfo = {
-      id: id,
-      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-      price: price,
-      name: name,
-    }
-    return goodInfo;
-  },
-
   goGoodDetail: function (e) {
     let goodID = e.currentTarget.dataset.id;
     wx.navigateTo({
@@ -228,37 +200,9 @@ Page({
     })
   },
 
-  addCart: function (e) {
-    const that = this;
-    let cart = app.globalData.cart;
+  addCart: async function (e) {
     let id = e.target.dataset.id;
-    if (!cart.has(id)) {
-      cart.set(id, 1);
-    } else {
-      let preCount = cart.get(id);
-      preCount++;
-      cart.set(id, preCount);
-    }
-    app.globalData.cart = cart;
+    _cart.add(id);
     console.log(app.globalData.cart);
-    wx.showToast({
-      title: '添加成功',
-      icon: 'success',
-      duration: 700
-    });
-    // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
   },
 })

@@ -8,7 +8,8 @@
     "pages/goods-details/index",
     "pages/explore/index",
     "pages/cart/index",
-    "pages/my/index"
+    "pages/my/index",
+    "pages/checkout/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

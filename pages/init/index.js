@@ -1,5 +1,8 @@
 // pages/init/index.js
 const app = getApp();
+const _storage = require('../../utils/common/storage');
+const util = require('../../utils/util');
+
 Page({
   /**
    * 页面的初始数据
@@ -13,16 +16,30 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-    if(!options.domain){
-      return this.setData({
-        requiredDomain: true
-      });
+  onLoad: async function (options) {
+    try{
+      let domain = await _storage.get('domain');
+
+      if (!domain) {
+        return this.setData({
+          requiredDomain: true
+        });
+      }else{
+        this.setData({
+          domain: domain
+        })
+      }
+    } catch (error) {
+      console.error(error);
+      wx.showToast({
+        title: '初始化失败',
+        icon: 'none'
+      })
     }
-    this.init(options.domain);
   },
 
   updateDomain({detail}){
+    app.globalData.domain = detail.value;
     this.setData({
       domain: detail.value
     });
@@ -49,6 +66,8 @@ Page({
       });
 
       app.globalData.domain = domain;
+      await _storage.set(domain, 'domain');
+
       const masterCodeInfo  = await app.http({
         method: 'get',
         url: `${app.globalData.apiBaseUrl}/public/shop/domain/get-master-code`,
@@ -58,7 +77,7 @@ Page({
         }
       });
       app.globalData.master_code = masterCodeInfo.data.detail;
-      console.log(app.globalData.master_code);
+      //console.log(app.globalData.master_code);
 
       const themesInfo = await app.http({
         method: 'get',
@@ -70,7 +89,7 @@ Page({
         }
       });
       app.globalData.themes = themesInfo.data.detail;
-      console.log(app.globalData.themes);
+      //console.log(app.globalData.themes);
       
       const entityInfo = await app.http({
         method: 'get',
@@ -82,7 +101,7 @@ Page({
         }
       });
       app.globalData.entity = entityInfo.data.detail;
-      console.log(app.globalData.entity);
+      //console.log(app.globalData.entity);
 
       const deliveryTypesInfo = await app.http({
         method: 'get',
@@ -94,7 +113,7 @@ Page({
         }
       });
       app.globalData.delivery_types = deliveryTypesInfo.data.detail;
-      console.log(app.globalData.delivery_types);
+      //console.log(app.globalData.delivery_types);
 
       const boxTypesInfo = await app.http({
         method: 'get',
@@ -106,7 +125,7 @@ Page({
         }
       });
       app.globalData.box_types = boxTypesInfo.data.detail;
-      console.log(app.globalData.box_types);
+      //console.log(app.globalData.box_types);
 
       const countInfo = await app.http({
         method: 'get',
@@ -118,7 +137,7 @@ Page({
         }
       });
       app.globalData.count = countInfo.data.detail;
-      console.log(app.globalData.count);
+      //console.log(app.globalData.count);
 
       const brandsInfo = await app.http({
         method: 'get',
@@ -130,7 +149,7 @@ Page({
         }
       });
       app.globalData.brands = brandsInfo.data.detail;
-      console.log(app.globalData.brands);
+      //console.log(app.globalData.brands);
 
       const sectionsInfo = await app.http({
         method: 'get',
@@ -155,6 +174,18 @@ Page({
       });
       app.globalData.stock = stockInfo.data.detail;
 
+      // 获取当前汇率
+      app.globalData.currentRate = 7.732341234;
+
+      //获取购物车缓存
+      try{
+        let cart = await _storage.get(`cart_${app.globalData.domain}`);
+        app.globalData.cart = new Map(cart);
+      }catch(err){
+        console.error(error);
+      }
+      
+
       this.getColors();
 
       wx.reLaunch({
@@ -171,6 +202,5 @@ Page({
   getColors(){
     let colors = app.globalData.entity.color_theme;
     app.globalData.colors = colors;
-    console.log(app.globalData.colors);
   }
 })

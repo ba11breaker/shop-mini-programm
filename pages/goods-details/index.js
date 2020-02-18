@@ -1,6 +1,7 @@
 // pages/goods-details/index.js
 const WxParse = require('../../wxParse/wxParse.js');
 const app = getApp();
+const _cart = require('../../utils/cart.js')
 
 Page({
 
@@ -104,22 +105,7 @@ Page({
   },
 
   addCart: function(e) {
-    const that = this;
-    let cart = app.globalData.cart;
-    let goodID = parseInt(that.data.goodID)
-    if(!cart.has(goodID)) {
-      cart.set(goodID, 1);
-    } else {
-      let preCount = cart.get(goodID);
-      preCount++;
-      cart.set(goodID, preCount);
-    }
-    app.globalData.cart = cart;
-    console.log(app.globalData.cart);
-    wx.showToast({
-      title: '添加成功',
-      icon: 'success',
-      duration: 700
-    });
+    let goodID = parseInt(this.data.goodID)
+    _cart.add(goodID);
   }
 })

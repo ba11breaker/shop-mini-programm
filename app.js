@@ -1,4 +1,6 @@
 //app.js
+const _stroage = require('./utils/common/storage.js');
+
 App({
   globalData: {
     isConnected: true,
@@ -12,6 +14,7 @@ App({
     box_types: {},
     count: 0,
     brands: [],
+    currentRate: 0,
 
     colors: [],
 
@@ -36,6 +39,10 @@ App({
     if(userInfo){
       this.verifyToken(userInfo)
     }
+    this.initCart();
+  },
+  async initCart(){
+    
   },
   goInitPage: function(){
     setTimeout(function(){
@@ -177,12 +184,4 @@ App({
       });
     });
   },
-
-  // 转化为金额格式
-  toMoney(num) {
-    num = num.toFixed(2);
-    num = parseFloat(num)
-    num = num.toLocaleString();
-    return num;
-  }
 })

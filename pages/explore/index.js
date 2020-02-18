@@ -1,5 +1,7 @@
 // pages/explore/index.js
 const app = getApp();
+const util = require('../../utils/util');
+const _cart = require('../../utils/cart');
 
 Page({
   /**
@@ -90,19 +92,7 @@ Page({
     wx.hideToast();
 
     // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    _cart.updateBadge();
   },
 
   setSections(){
@@ -205,7 +195,7 @@ Page({
     let stock_good = null;
     if(momentInfo.stock_id){
       let good = stockMap.get(momentInfo.stock_id);
-      stock_good = this.parseGood(good);
+      stock_good = util.parseGood(good);
     }
     return{
       id: id,
@@ -217,23 +207,6 @@ Page({
       content: content,
       stock_good: stock_good
     }
-  },
-
-  // 转换商品信息
-  parseGood(good) {
-    let id = good.id;
-    let name = good.name;
-    let images = JSON.parse(good.images);
-    let imageURL = encodeURIComponent(images[0].url);
-    let price = [Math.round(good.price * 100) / 100, Math.round((good.price+10) * 100) / 100];
-    let recommendGood = {
-      id: id,
-      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
-      price: price,
-      name: name,
-      selected: true
-    }
-    return recommendGood;
   },
 
   parseContent(string) {

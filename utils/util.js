@@ -1,19 +1,22 @@
-const formatTime = date => {
-  const year = date.getFullYear()
-  const month = date.getMonth() + 1
-  const day = date.getDate()
-  const hour = date.getHours()
-  const minute = date.getMinutes()
-  const second = date.getSeconds()
-
-  return [year, month, day].map(formatNumber).join('/') + ' ' + [hour, minute, second].map(formatNumber).join(':')
-}
-
-const formatNumber = n => {
-  n = n.toString()
-  return n[1] ? n : '0' + n
-}
-
+const app =getApp();
 module.exports = {
-  formatTime: formatTime
+  parseGood(good) {
+
+    let id = good.id;
+    let name = good.name;
+    let images = JSON.parse(good.images || '[]');
+    let imageURL = encodeURI(images[0].url);
+    let price = [Math.round(good.price * 100) / 100, Math.round(good.price * app.globalData.currentRate * 100) / 100];
+    let brand = good.stock_brand;
+    let recommendGood = {
+      id: id,
+      images: `${app.globalData.imagesApiAWSUrl}/${imageURL}`,
+      price: price,
+      name: name,
+      selected: true,
+      isShow: true,
+      brand: brand
+    }
+    return recommendGood;
+  }
 }
