@@ -103,42 +103,6 @@ Page({
       app.globalData.entity = entityInfo.data.detail;
       //console.log(app.globalData.entity);
 
-      const deliveryTypesInfo = await app.http({
-        method: 'get',
-        url: `${app.globalData.apiBaseUrl}/public/shop/deliveries/get-delivery-types`,
-        header: {
-          from: `https://easyqshop.com/${domain}`,
-          authorization: `Bearer ${app.globalData.token}`,
-          'x-api-key': app.globalData.master_code
-        }
-      });
-      app.globalData.delivery_types = deliveryTypesInfo.data.detail;
-      //console.log(app.globalData.delivery_types);
-
-      const boxTypesInfo = await app.http({
-        method: 'get',
-        url: `${app.globalData.apiBaseUrl }/public/shop/deliveries/get-box-types`,
-        header:{
-          from: `https://easyqshop.com/${domain}`,
-          authorization: `Bearer ${app.globalData.token}`,
-          'x-api-key': app.globalData.master_code
-        }
-      });
-      app.globalData.box_types = boxTypesInfo.data.detail;
-      //console.log(app.globalData.box_types);
-
-      const countInfo = await app.http({
-        method: 'get',
-        url: `${app.globalData.apiBaseUrl}/public/shop/stockLinkage/count`,
-        header: {
-          from: `https://easyqshop.com/${domain}`,
-          authorization: `Bearer ${app.globalData.token}`,
-          'x-api-key': app.globalData.master_code
-        }
-      });
-      app.globalData.count = countInfo.data.detail;
-      //console.log(app.globalData.count);
-
       const brandsInfo = await app.http({
         method: 'get',
         url: `${app.globalData.apiBaseUrl}/public/shop/brands`,
@@ -182,7 +146,7 @@ Page({
         let cart = await _storage.get(`cart_${app.globalData.domain}`);
         app.globalData.cart = new Map(cart);
       }catch(err){
-        console.error(error);
+        console.error(err);
       }
       
 
@@ -194,8 +158,8 @@ Page({
           wx.hideHomeButton();
         }
       });
-    } catch (error) {
-      console.error(error);
+    } catch (err) {
+      console.error(err);
     }
   },
 
