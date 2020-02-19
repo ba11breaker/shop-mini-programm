@@ -9,7 +9,8 @@
     "pages/explore/index",
     "pages/cart/index",
     "pages/my/index",
-    "pages/checkout/index"
+    "pages/checkout/index",
+    "pages/tools/address"
   ],
   "window": {
     "backgroundTextStyle": "light",

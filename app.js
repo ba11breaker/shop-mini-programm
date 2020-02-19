@@ -22,6 +22,9 @@ App({
     stock: [],
 
     cart: new Map(),
+    checkoutList: [], 
+    customerInfo : [],
+
 
     userInfo: {},
     token: '',
@@ -30,7 +33,6 @@ App({
     imagesApiBaseUrl: 'https://images.dev.v1.qpanda.com.au',
     imagesApiAWSUrl: 'https://qpanda-admin-images-dev.s3-ap-southeast-2.amazonaws.com',
 
-    userInfo: null
   },
   onLaunch: function () {
     const that = this;

@@ -228,8 +228,7 @@ Page({
     }
     let cart = this.data.cart;
     cart[id][1] = value;
-    let cartMap = new Map(cart);
-    app.globalData.cart = cartMap;
+    app.globalData.cart = new Map(cart);
 
     // 设置缓存
     _cart.setStorage();
@@ -245,8 +244,7 @@ Page({
     this.setData({
       cart: cart
     });
-    let cartMap = new Map(cart);
-    app.globalData.cart = cartMap;
+    app.globalData.cart = new Map(cart);
     // 设置缓存
     _cart.setStorage();
     // 设置商品总价
@@ -262,8 +260,7 @@ Page({
      this.setData({
        cart: cart
      });
-     let cartMap = new Map(cart);
-     app.globalData.cart = cartMap;
+     app.globalData.cart = new Map(cart);
      // 设置缓存
      _cart.setStorage();
      // 设置商品总价
@@ -342,15 +339,42 @@ Page({
   },
 
   payNow: function(e) {
-    if(this.data.cartGoods.length == 0 || this.data.mode != 'normal') {
+    let noSelected = true
+    this.data.cartGoods.forEach(function(item){
+      if(item.selected){
+        noSelected = false;
+      }
+    });
+    if(this.data.cartGoods.length == 0 || this.data.mode != 'normal' || noSelected) {
       wx.showToast({
         title: '请添加商品',
         icon: 'none',
         duration: 2000
       })
+      return null;
     }
+    this.addCheckoutList();
     wx.navigateTo({
       url: '/pages/checkout/index',
     })
+  },
+
+  // 结算订单
+  addCheckoutList(){
+    const cart = this.data.cart;
+    const cartGoods = this.data.cartGoods;
+    let goods = [];
+    for(var i = 0; i < cartGoods.length; i++) {
+      if(cartGoods[i].selected) {
+        goods.push({
+          id: cartGoods[i].id,
+          images: cartGoods[i].images,
+          name: cartGoods[i].name,
+          price: cartGoods[i].price,
+          amount: cart[i][1]
+        });
+      }
+    }
+    app.globalData.checkoutList = goods;
   }
 })

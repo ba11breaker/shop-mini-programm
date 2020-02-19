@@ -76,7 +76,7 @@ page,view,image,input {
 
 .goods-container .box{
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-around;  
   flex-wrap:wrap;
   align-content: flex-start;
   background: #fff;

@@ -1,2 +1,10 @@
 <!--pages/checkout/index.wxml-->
-<text>pages/checkout/index.wxml</text>
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>确认订单</view>
+</view>
+<view class="address-info">
+  <view class="no-data" wx:if="{{customerInfo.length==0}}">
+    <view><text>请填写地址</text> 或 <text bindtap="onClickLogin">登录</text></view>
+    <image src="/images/goods-detail/right.png"></image>
+  </view>
+</view>

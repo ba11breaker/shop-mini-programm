@@ -1,1 +1,37 @@
 /* pages/checkout/index.wxss */
+page{
+  background-color: #f6f6f6;
+}
+.header{
+  width: 100%;
+  height: 8vh;
+  display: flex;
+}
+.header view{
+  position: relative;
+  color: #fff;
+  margin: 20rpx 20rpx 0rpx;
+  font-size:35rpx;
+}
+.address-info{
+  width: 100%;
+  background-color: #fff;
+  padding: 2vh 0 2vh;
+}
+.address-info .no-data{
+  width: 100%;
+  height: 5vh;
+  padding: 0 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size:3vh;
+}
+.address-info .no-data text{
+  text-decoration: underline;
+}
+.address-info .no-data image{
+  width: 4vh;
+  height: 4vh;
+  margin-right: 30rpx;
+}
