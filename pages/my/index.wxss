@@ -1,1 +1,25 @@
 /* pages/my/index.wxss */
+page{
+  background-color: #f6f6f6;
+}
+.header{
+  width: 100%;
+  height: 8vh;
+  display: flex;
+}
+.header view{
+  position: relative;
+  color: #fff;
+  margin: 20rpx 20rpx 0rpx;
+  font-size:35rpx;
+}
+
+.my-header{
+  width: 100%;
+  background-color: #fff;
+}
+.my-header .login-info{
+  width: 70%;
+  height: 15vh;
+  margin: auto;
+}

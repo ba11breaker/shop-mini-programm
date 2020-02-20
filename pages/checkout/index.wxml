@@ -8,3 +8,6 @@
     <image src="/images/goods-detail/right.png"></image>
   </view>
 </view>
+
+<import src="/template/login/login.wxml"></import>
+<template is="apifmLogin" data="{{wxlogin: wxlogin}}"></template>

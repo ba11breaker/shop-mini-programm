@@ -1,2 +1,7 @@
 <!--pages/my/index.wxml-->
-<text>pages/my/index.wxml</text>
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>个人中心</view>
+</view>
+<view class="my-header">
+  <view class="login-info"></view>
+</view>

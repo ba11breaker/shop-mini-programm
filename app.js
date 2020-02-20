@@ -25,13 +25,19 @@ App({
     checkoutList: [], 
     customerInfo : [],
 
-
     userInfo: {},
     token: '',
     refreshToken: '',
     apiBaseUrl: 'https://api.v1.qpanda.com.au',
     imagesApiBaseUrl: 'https://images.dev.v1.qpanda.com.au',
     imagesApiAWSUrl: 'https://qpanda-admin-images-dev.s3-ap-southeast-2.amazonaws.com',
+
+    appid: 'wx5074537799b00f19',
+    appsecret: 'cc475138e024ce5af0496fc01d16fa6b',
+    loginInfo: {
+      session_key: '',
+      openid: ''
+    }
 
   },
   onLaunch: function () {

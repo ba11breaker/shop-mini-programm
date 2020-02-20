@@ -11,7 +11,9 @@ Page({
     customerInfo: [],
     checkoutList: [],
     colors: {},
-    userInfo: {}
+    userInfo: {},
+
+    wxlogin: true
   },
 
   /**
@@ -26,6 +28,9 @@ Page({
   },
 
   onClickLogin: function(e) {
+    this.setData({
+      wxlogin: true
+    })
     _login.login();
   }
 })

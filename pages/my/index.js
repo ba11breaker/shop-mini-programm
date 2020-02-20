@@ -7,14 +7,17 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    coloes: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(app.globalData.loginInfo);
+    this.setData({
+      colors: JSON.parse(app.globalData.colors)
+    });
   },
 
   /**
