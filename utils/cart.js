@@ -63,6 +63,6 @@ module.exports = {
 
   async setStorage(){
     const cart = app.globalData.cart;
-    await _storage.set([...cart], `cart_${app.globalData.domain}`);
+    await _storage.set([...cart], 'cart');
   }
 }

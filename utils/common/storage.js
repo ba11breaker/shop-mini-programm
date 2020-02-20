@@ -1,9 +1,13 @@
 module.exports = {
   async set(data, key) {
+    let domain = "";
+    if (key !== "domain")
+      domain = await this.getDomain();
+
     return new Promise((res, rej) => {
       wx.setStorage({
         data,
-        key,
+        key: domain + key,
         success: function(result) {
           res(result);
         },
@@ -14,10 +18,27 @@ module.exports = {
     })
   },
 
-  async get(key) {
+  async getDomain() {
     return new Promise((res, rej) => {
       wx.getStorage({
-        key,
+        key: 'domain',
+        success: function(data) {
+          res(data['data']);
+        },
+        fail: function(error) {
+          rej(error);
+        }
+      })
+    });
+  },
+
+  async get(key) {
+    let domain = "";
+    if (key !== "domain")
+      domain = await this.getDomain();
+    return new Promise((res, rej) => {
+      wx.getStorage({
+        key: domain + key,
         success: function(data) {
           res(data['data']);
         },
@@ -29,6 +50,10 @@ module.exports = {
   },
 
   async remove(key) {
+    let domain = "";
+    if(key !== "domain")
+      domain = await this.getDomain();
+  
     return new Promise((res, rej) => {
       wx.removeStorage({
         key,

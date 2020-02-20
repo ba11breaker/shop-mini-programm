@@ -3,5 +3,9 @@
   <view>个人中心</view>
 </view>
 <view class="my-header">
-  <view class="login-info"></view>
+  <view class="login-info" wx:if="{{isLoggedIn}}">
+  </view>
+  <view class="log-off" wx:else bindtap="onClickLog">
+    请先登录
+  </view>
 </view>

@@ -1,0 +1,33 @@
+<!--pages/login/index.wxml-->
+<view>
+  <view class="icon-container">
+    <image mode="widthFix"  src="https://beta.pandapos.app/assets/imgs/logo.svg"></image>
+  </view>
+  <view class="form-container">
+    <view class="input-group">
+      <label>手机</label>
+      <input bindinput="updatePhone" value="{{phone}}" type="tel"></input>
+    </view>
+    
+    <view class="input-group">
+      <label>密码</label>
+      <input bindinput="updatePassword" value="{{password}}" type="password" placeholder="********"></input>
+    </view>
+
+    <view class="btn-container">
+      <button bindtap="login" class="login-btn" type="default">
+        <text>手机登陆</text>
+      </button>
+
+      <button bindtap="wechatLogin" class="login-btn" type="primary">
+        <text>微信登陆</text>
+      </button>
+    </view>
+  </view>
+
+  <import src="/template/wx-sign/index.wxml" />
+  <template is="apifmSign" data="{{wxSign: hideWxSign}}"></template>
+
+  <import src="/template/wx-sign-phone/index.wxml" />
+  <template is="apifmSign" data="{{wxSign: hideWxSignPhone, phone: phone}}"></template>
+</view>

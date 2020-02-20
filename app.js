@@ -1,5 +1,7 @@
 //app.js
 const _stroage = require('./utils/common/storage.js');
+const { auth, storage } = require('./utils/index');
+const env = require("./environment");
 
 App({
   globalData: {
@@ -28,29 +30,15 @@ App({
     userInfo: {},
     token: '',
     refreshToken: '',
-    apiBaseUrl: 'https://api.v1.qpanda.com.au',
-    imagesApiBaseUrl: 'https://images.dev.v1.qpanda.com.au',
-    imagesApiAWSUrl: 'https://qpanda-admin-images-dev.s3-ap-southeast-2.amazonaws.com',
-
-    appid: 'wx5074537799b00f19',
-    appsecret: 'cc475138e024ce5af0496fc01d16fa6b',
-    loginInfo: {
-      session_key: '',
-      openid: ''
-    }
+    apiBaseUrl: env.BACKEND_URL,
+    imagesApiBaseUrl: env.USER_IMAGES_URL,
+    imagesApiAWSUrl: env.RESOURCES_IMAGES_URL,
+    appid: env.APP_ID
 
   },
-  onLaunch: function () {
-    const that = this;
-    // 检查登陆状态
-    const userInfo = wx.getStorageSync('userInfo');
-    if(userInfo){
-      this.verifyToken(userInfo)
-    }
-    this.initCart();
-  },
-  async initCart(){
-    
+  onLaunch: async function (options) {
+    if (options.query.domain) await storage.set(options.query.domain, 'domain');
+    auth.checkLogin();
   },
   goInitPage: function(){
     setTimeout(function(){
@@ -58,36 +46,6 @@ App({
         url:"/pages/init/index"
       })
     }, 500)
-  },
-  verifyToken(userInfo) {
-    wx.request({
-      url: `${this.globalData.apiBaseUrl}/auth/refreshToken`,
-      method: 'post',
-      data: {
-        token: userInfo.token,
-        refreshToken: userInfo.refreshToken
-      },
-      success: ({ data: { detail } }) => {
-        userInfo.token = detail.token;
-        userInfo.refreshToken = detail.refreshToken;
-        this.globalData.userInfo = userInfo;
-        this.globalData.token = detail.token;
-        this.globalData.refreshToken = detail.refreshToken;
-        wx.setStorageSync('userInfo', userInfo);
-        this.tokenVerified();
-      },
-      fail: (err) => {
-        console.error(err);
-        wx.removeStorage({
-          key: 'userInfo'
-        })
-      }
-    })
-  },
-  tokenVerified(){
-    wx.reLaunch({
-      url: '/pages/index/index',
-    })
   },
   /*
   ** 访问master_code等后端数据

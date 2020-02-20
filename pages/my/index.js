@@ -1,5 +1,7 @@
 // pages/my/index.js
 const app = getApp();
+const helpers = require("./../../utils/index");
+const _cart = require("./../../utils/cart");
 
 Page({
 
@@ -8,22 +10,13 @@ Page({
    */
   data: {
     coloes: [],
+    isLoggedIn: false,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(app.globalData.loginInfo);
-    this.setData({
-      colors: JSON.parse(app.globalData.colors)
-    });
-  },
-
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
   },
 
@@ -32,53 +25,14 @@ Page({
    */
   onShow: function () {
     // 显示购物车红点
-    if (app.globalData.cart.size > 0) {
-      wx.showTabBarRedDot({
-        index: 3,
-      })
-      wx.setTabBarBadge({
-        index: 3,
-        text: app.globalData.cart.size.toString()
-      })
-    } else {
-      wx.hideTabBarRedDot({
-        index: 3,
-      })
-    }
+    _cart.updateBadge();
+    this.setData({
+      colors: JSON.parse(app.globalData.colors),
+      isLoggedIn: helpers.auth.isLoggedIn()
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  onClickLog: function(e) {
+    helpers.auth.getLogin();
   }
 })

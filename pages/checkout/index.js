@@ -1,6 +1,6 @@
 // pages/checkout/index.js
 const app = getApp()
-const _login = require("../../utils/common/login.js") 
+const helpers = require("./../..//utils/index");
 
 Page({
 
@@ -28,9 +28,6 @@ Page({
   },
 
   onClickLogin: function(e) {
-    this.setData({
-      wxlogin: true
-    })
-    _login.login();
+    helpers.auth.getLogin();
   }
 })

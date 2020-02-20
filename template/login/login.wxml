@@ -1,6 +1,0 @@
-<template name="apifmLogin">
-  <view class="apifmLogin" hidden="{{wxlogin}}">
-    <view class="s-b">
-    </view>
-  </view>
-</template>

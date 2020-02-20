@@ -1,0 +1,13 @@
+<template name="apifmSign">
+  <view class="apifmSign" hidden="{{wxSign}}">
+    <view class="s-b">
+      <view class="s-t-b">
+        <view class="input-group">
+          <label>手机</label>
+          <input bindinput="updatePhone" type="tel" value="{{phone}}"></input>
+        </view> 
+      </view>
+      <button class="l"  bindtap="getPhone">请输入电话号码</button>
+    </view>
+  </view>
+</template>

@@ -1,5 +1,4 @@
 /* pages/checkout/index.wxss */
-@import "/template/login/login.wxss";
 page{
   background-color: #f6f6f6;
 }

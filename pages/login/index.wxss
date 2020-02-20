@@ -1,0 +1,28 @@
+/* pages/login/index.wxss */
+@import "./../init/index.wxss";
+@import "/template/wx-sign/index.wxss";
+@import "/template/wx-sign-phone/index.wxss";
+
+.input-group {
+  width: 200px;
+  margin: 1.5em auto;
+  border-bottom: 1rpx solid lightgrey;
+}
+
+.input-group label {
+  font-size: small;
+  color: grey;
+}
+
+.login-btn {
+  width: 90px;
+  margin: auto 0.8em;
+  border: 0;
+  border-radius: 2rpx;
+  font-size: 14px;
+  display: inline-block;
+}
+
+.btn-container {
+  text-align: center;
+}

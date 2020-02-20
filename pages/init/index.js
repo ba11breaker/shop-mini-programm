@@ -1,7 +1,6 @@
 // pages/init/index.js
 const app = getApp();
-const _storage = require('../../utils/common/storage');
-const util = require('../../utils/util');
+const helpers = require('../../utils/index')
 
 Page({
   /**
@@ -18,8 +17,12 @@ Page({
    */
   onLoad: async function (options) {
     try{
-      let domain = await _storage.get('domain');
-
+      let domain;
+      try{
+        domain = await helpers.storage.get('domain');
+      } catch (error) {
+        console.error("没有 Domain 记录")
+      }
       if (!domain) {
         return this.setData({
           requiredDomain: true
@@ -28,6 +31,7 @@ Page({
         this.setData({
           domain: domain
         })
+        this.init(domain);
       }
     } catch (error) {
       console.error(error);
@@ -66,7 +70,7 @@ Page({
       });
 
       app.globalData.domain = domain;
-      await _storage.set(domain, 'domain');
+      await helpers.storage.set(domain, 'domain');
 
       const masterCodeInfo  = await app.http({
         method: 'get',
@@ -77,6 +81,7 @@ Page({
         }
       });
       app.globalData.master_code = masterCodeInfo.data.detail;
+      helpers.http.setMasterCode(masterCodeInfo.data.detail);
       //console.log(app.globalData.master_code);
 
       const themesInfo = await app.http({
@@ -143,7 +148,7 @@ Page({
 
       //获取购物车缓存
       try{
-        let cart = await _storage.get(`cart_${app.globalData.domain}`);
+        let cart = await helpers.storage.get('cart');
         app.globalData.cart = new Map(cart);
       }catch(err){
         console.error(err);

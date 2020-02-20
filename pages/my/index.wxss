@@ -17,9 +17,20 @@ page{
 .my-header{
   width: 100%;
   background-color: #fff;
+  padding: 5vh 0 5vh;
 }
 .my-header .login-info{
   width: 70%;
-  height: 15vh;
+  height: 10vh;
   margin: auto;
+}
+.my-header .log-off{
+  width: 40%;
+  height: 8vh;
+  border-radius:1vh;
+  margin: auto;
+  background-color: #f8f8f8;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
