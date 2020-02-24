@@ -9,8 +9,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    coloes: [],
+    colors: {},
     isLoggedIn: false,
+    userInfo: {}
   },
 
   /**
@@ -30,9 +31,31 @@ Page({
       colors: JSON.parse(app.globalData.colors),
       isLoggedIn: helpers.auth.isLoggedIn()
     });
+    if(this.data.isLoggedIn){
+      this.getUserInfo();
+    }
   },
 
   onClickLog: function(e) {
     helpers.auth.getLogin();
+  },
+
+  async getUserInfo(){
+    this.setData({
+      userInfo: await helpers.storage.get('user')
+    })
+  },
+
+  // 退出登录状态
+  async quitLog(e){
+    try{
+      await helpers.auth.logOut();
+      this.setData({
+        userInfo: {},
+        isLoggedIn: helpers.auth.isLoggedIn()
+      });
+    }catch(err){
+      console.error(err);
+    }
   }
 })

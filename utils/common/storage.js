@@ -56,7 +56,7 @@ module.exports = {
   
     return new Promise((res, rej) => {
       wx.removeStorage({
-        key,
+        key: domain + key,
         success: function(result) {
           res(result);
         },

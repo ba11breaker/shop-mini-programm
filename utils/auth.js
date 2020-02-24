@@ -62,9 +62,24 @@ module.exports = {
     try {
       const { detail } = await common.http.send("post", "/wx/mini", { js_code }, env.AUTH_URL);
       console.log(detail);
+      const tokens = {
+        token: detail.token,
+        refreshToken: detail.refreshToken
+      }
+      await common.storage.set(detail.user, "user");
+      await common.storage.set(detail.tokens, "tokens");
+      common.http.setToken(tokens);
+      common.toast.showToast("登陆成功");
+      _user = detail.user;
+      console.log(_user.id);
+      return detail;
     } catch (error) {
+      if (error.statusCode === 409)
+        common.toast.showToast("账号密码错误", "none");
+      else
+        common.toast.showToast("系统错误，请退出重试", "none");
       console.error(error);
-      return error;
+      throw error;
     }
     common.toast.hideToast();
   },
@@ -78,9 +93,24 @@ module.exports = {
 
       common.http.setToken(tokens);
       common.toast.showToast("登陆成功");
-      _user = detail;
-
+      _user = detail.user;
     } catch( err ) {
+      if (error.statusCode === 409)
+        common.toast.showToast("账号密码错误", "none");
+      else
+        common.toast.showToast("系统错误，请退出重试", "none");
+      throw err;
+    }
+  },
+
+  async logOut(){
+    try{
+      await common.storage.remove("user");
+      await common.storage.remove("tokens");
+      _user = {};
+      common.toast.showToast("已登出", "none");
+    }catch(err){
+      common.toast.showToast("登出失败", "none");
       throw err;
     }
   }

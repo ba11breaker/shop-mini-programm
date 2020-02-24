@@ -4,8 +4,52 @@
 </view>
 <view class="my-header">
   <view class="login-info" wx:if="{{isLoggedIn}}">
+    <image class="avatar" src="{{userInfo.avatar}}"></image>
+    <view class="name">您好,{{userInfo.name}}<text bindtap="quitLog">></text></view>
   </view>
   <view class="log-off" wx:else bindtap="onClickLog">
     请先登录
   </view>
+  <view class="info-bar">
+    <view class="bar-content">
+      <view class="num" style="color:{{colors.primary}}">0</view>
+      <view class="title">我的积分</view>
+    </view>
+    <view class="bar-content">
+      <view class="num" style="color:{{colors.primary}}">0</view>
+      <view class="title">优惠券</view>
+    </view>
+    <view class="bar-content">
+      <view class="num" style="color:{{colors.primary}}">0</view>
+      <view class="title">我的收藏</view>
+    </view>
+  </view>
+</view>
+
+<view class="order-info">
+  <view class="title-header">
+    <view>订单详情</view>
+    <view style="color:{{colors.primary}}">查看所有订单</view>
+  </view>
+  <view class="sections">
+    <view class="section">
+      <image src="/images/my/not-pay.png"></image>
+      <view>待付款</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/not-send.png"></image>
+      <view>待发货</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/sended.png"></image>
+      <view>待收货</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/received.png"></image>
+      <view>已完成</view>
+    </view>
+  </view>
+</view>
+
+<view>
 </view>

@@ -45,14 +45,19 @@ Page({
     const that = this;
     wx.login({
       async success({ code, errMsg }) {
-        if (errMsg !== 'login:ok')
-          return helpers.toast.showToast("微信授权失败,请检查设置。", "none");
+        try{
+          if (errMsg !== 'login:ok')
+            return helpers.toast.showToast("微信授权失败,请检查设置。", "none");
 
-        const wechatMsg = await helpers.auth.wechatLogin(code);
-        if (wechatMsg.data.detail == "User Not Found.") {
-          that.setData({
-            hideWxSign: false
-          });
+          const wechatMsg = await helpers.auth.wechatLogin(code);
+          if (wechatMsg === "User Not Found.") {
+            that.setData({
+              hideWxSign: false
+            });
+          }
+          wx.navigateBack();
+        }catch(err){
+          console.error(err);
         }
       },
       fail() {
@@ -94,7 +99,7 @@ Page({
           const wechatMsg = await helpers.auth.wechatSign({
             phone: that.data.phone,
             name: that.data.signInfo.nickName,
-            avarta: that.data.signInfo.avatarUrl,
+            avatar: that.data.signInfo.avatarUrl,
             js_code: code
           });
         },

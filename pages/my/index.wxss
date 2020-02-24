@@ -17,12 +17,30 @@ page{
 .my-header{
   width: 100%;
   background-color: #fff;
-  padding: 5vh 0 5vh;
+  padding: 2vh 0 0;
 }
 .my-header .login-info{
-  width: 70%;
-  height: 10vh;
+  width: 80%;
+  height: 12vh;
   margin: auto;
+  display: flex;
+}
+.my-header .login-info .avatar{
+  width: 10vh;
+  height: 10vh;
+  border-radius: 50%;
+}
+.my-header .login-info .name{
+  height: 10vh;
+  margin-left: 5vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3vh;
+}
+.my-header .login-info .name text{
+  font-size: 4vh;
+  margin-left: 10rpx;
 }
 .my-header .log-off{
   width: 40%;
@@ -33,4 +51,63 @@ page{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.my-header .info-bar{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.my-header .info-bar .bar-content{
+  width: 25%;
+  height: 10vh;
+}
+.my-header .info-bar .bar-content .num{
+  text-align: center;
+  font-size: 2.5vh;
+}
+.my-header .info-bar .bar-content .title{
+  text-align: center;
+  font-size: 2.6vh;
+}
+
+.order-info{
+  margin-top: 20rpx;
+  width: 100%;
+  background-color: #fff;
+}
+.order-info .title-header{
+  width: 100;
+  height: 7vh;
+  border-bottom: 1px solid #dee2e6;
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.order-info .title-header view{
+  display: flex;
+  justify-content: cetner;
+  align-items: center;
+  font-size: 2.5vh;
+}
+.order-info .sections{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.order-info .sections .section{
+  width: 20vw;
+  text-align: center;
+}
+.order-info .sections .section image{
+  margin-top: 3vw;
+  width: 10vw;
+  height: 8.8vw;
+}
+.order-info .sections .section view{
+  width: 20vw;
+  font-size: 2.8vw;
+  margin-bottom: 4vw;
 }
