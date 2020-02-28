@@ -1,66 +1,59 @@
 // pages/tools/address.js
+const app = getApp();
+const helpers = require("./../..//utils/index");
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    colors: {},
+    infos: [],
+    selIndex: 0
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    
   },
 
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
 
+  onShow: function(optinos) {
+    this.getInfos();
+    this.setData({
+      colors: JSON.parse(app.globalData.colors)
+    });
   },
 
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
+  chooseAdd(e){
+    console.log(e);
   },
 
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
+  async editAddress(e){
+    const address = e.target.dataset.id;
+    try{
+      await helpers.storage.set(address, 'address_edit');
+      wx.navigateTo({
+        url: '/pages/tools/edit-address?type=edit',
+      })
+    }catch(err){
+      console.error(err);
+    }
   },
 
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+  async getInfos(){
+    try{
+      const userInfo = await helpers.storage.get('user');
+      const { address, selIndex } = await helpers.address.httpAddress();
+      this.setData({
+        infos: address,
+        selIndex: selIndex
+      })
+    }catch(err){
+      console.error(err);
+    }
   }
 })

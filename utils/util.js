@@ -15,7 +15,9 @@ module.exports = {
       name: name,
       selected: true,
       isShow: true,
-      brand: brand
+      brand: brand,
+      height: good.height,
+      weight: good.weight
     }
     return recommendGood;
   }

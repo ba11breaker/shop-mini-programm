@@ -51,5 +51,44 @@
   </view>
 </view>
 
-<view>
+<view class="tool-info">
+  <view class="title-header">
+    <view>常用工具</view>
+  </view>
+  <view class="sections">
+    <view class="section">
+      <image src="/images/my/setup.png"></image>
+      <view>账户设置</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/address.png" style></image>
+      <view>常用地址</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/upload.png"></image>
+      <view>上传身份证</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/questions.png"></image>
+      <view>常见问题</view>
+    </view>
+  </view>
+  <view class="sections">
+    <view class="section">
+      <image src="/images/my/pingtuan.png"></image>
+      <view>我的拼团</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/youhui.png"></image>
+      <view>优惠券</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/jifen.png"></image>
+      <view>我的积分</view>
+    </view>
+    <view class="section">
+      <image src="/images/my/kefu.png"></image>
+      <view>联系客服</view>
+    </view>
+  </view>
 </view>

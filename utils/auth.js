@@ -61,17 +61,12 @@ module.exports = {
     common.toast.showLoading();
     try {
       const { detail } = await common.http.send("post", "/wx/mini", { js_code }, env.AUTH_URL);
-      console.log(detail);
-      const tokens = {
-        token: detail.token,
-        refreshToken: detail.refreshToken
-      }
+      const tokens = detail.tokens;
       await common.storage.set(detail.user, "user");
       await common.storage.set(detail.tokens, "tokens");
       common.http.setToken(tokens);
       common.toast.showToast("登陆成功");
       _user = detail.user;
-      console.log(_user.id);
       return detail;
     } catch (error) {
       if (error.statusCode === 409)

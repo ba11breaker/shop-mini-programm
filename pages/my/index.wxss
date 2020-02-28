@@ -46,7 +46,7 @@ page{
   width: 40%;
   height: 8vh;
   border-radius:1vh;
-  margin: auto;
+  margin: 2vh auto;
   background-color: #f8f8f8;
   display: flex;
   justify-content: center;
@@ -107,6 +107,46 @@ page{
   height: 8.8vw;
 }
 .order-info .sections .section view{
+  width: 20vw;
+  font-size: 2.8vw;
+  margin-bottom: 4vw;
+}
+
+.tool-info{
+  margin-top: 20rpx;
+  width: 100%;
+  background-color: #fff;
+}
+.tool-info .title-header{
+   width: 100;
+  height: 7vh;
+  padding: 0 20rpx;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.tool-info .title-header view{
+  display: flex;
+  justify-content: cetner;
+  align-items: center;
+  font-size: 2.5vh;
+}
+.tool-info .sections{
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+.tool-info .sections .section{
+  width: 20vw;
+  text-align: center;
+}
+.tool-info .sections .section image{
+  margin-top: 3vw;
+  width: 8vw;
+  height: 8vw;
+}
+.tool-info .sections .section view{
   width: 20vw;
   font-size: 2.8vw;
   margin-bottom: 4vw;

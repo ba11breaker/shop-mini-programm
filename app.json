@@ -11,7 +11,8 @@
     "pages/my/index",
     "pages/checkout/index",
     "pages/login/index",
-    "pages/tools/address"
+    "pages/tools/address",
+    "pages/tools/edit-address"
   ],
   "window": {
     "backgroundTextStyle": "light",

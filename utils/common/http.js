@@ -12,7 +12,11 @@ module.exports = {
   },
 
   async renewToken() {
-
+    try{
+      const { detail: tokens } = await this.send('post', '/auth/refreshToken', {}, env.AUTH_URL);
+    }catch(err){
+      console.error(err);
+    }
   },
 
   send(method, url, payload, baseUrl, noToken = false) {
@@ -42,5 +46,30 @@ module.exports = {
         }
       })
     });
+  },
+
+  get(method, url, baseUrl, noToken = false){
+    return new Promise((res, rej) => {
+      const header = {};
+      if (_master_code)
+        header['x-api-key'] = _master_code;
+      if (!noToken && _tokens.token) {
+        header['authorization'] = `Bearer ${_tokens.token}`;
+      }
+      wx.request({
+        method,
+        url: baseUrl + url,
+        header,
+        success({ data, statusCode }) {
+          if (statusCode != 200) {
+            rej({ data, statusCode })
+          }
+          res(data);
+        },
+        fail(err) {
+          rej(err);
+        }
+      })
+    })
   }
 }

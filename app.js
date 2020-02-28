@@ -16,7 +16,7 @@ App({
     box_types: {},
     count: 0,
     brands: [],
-    currentRate: 0,
+    currentRate: 4.7345352345,
 
     colors: [],
 

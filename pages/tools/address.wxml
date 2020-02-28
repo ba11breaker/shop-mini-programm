@@ -1,2 +1,19 @@
 <!--pages/tools/address.wxml-->
-<text>pages/tools/address.wxml</text>
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>常用地址</view>
+</view>
+
+<view class="brief-container">
+  <view class="box" wx:for="{{infos}}" wx:key="id">
+    <view class="choose"><image src="{{index==selIndex?'/images/cart/selected.png':'/images/cart/notSelected.png'}}" bindtap="chooseAdd" data-id="{{index}}"></image></view>
+    <view class="info-bar">
+      <view class="user-info">{{item.name}}     {{item.phone}}</view>
+      <view class="address-info">{{item.street}}</view>
+    </view>
+    <view class="edit"><image src="/images/address/edit.png" bindtap="editAddress" data-id="{{item}}"></image></view>
+  </view>
+</view>
+
+<view class="add-address" style="background-color:{{colors.primary}}">
+  新增收货地址
+</view>

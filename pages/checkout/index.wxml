@@ -4,7 +4,33 @@
 </view>
 <view class="address-info">
   <view class="no-data" wx:if="{{customerInfo.length==0}}">
-    <view><text>请填写地址</text> 或 <text bindtap="onClickLogin">登录</text></view>
+    <view><text wx:if="{{isLoggedIn}}" bindtap="onClickAddress">请填写地址</text><block wx:if="{{!isLoggedIn}}"><text bindtap="onClickLogin">登录</text></block></view>
+    <image src="/images/goods-detail/right.png" bindtap="onClickGo"></image>
+  </view>
+</view>
+
+<view class="goods-list">
+  <view class="good" wx:for="{{checkoutList}}" wx:key="id">
+    <view class="image"><image src="{{item.good.images}}"></image></view>
+    <view class="title">{{item.good.name}}</view>
+    <view class="price">
+      <view>AU${{item.good.price[0]}}</view>
+      <view>×{{item.qty}}</view>
+    </view>
+  </view>
+</view>
+
+<view class="order-info">
+  <view class="post-fee-info"></view>
+  <view class="statement">
+    <view class="title">配送声明</view>
+    <view class="content"> 澳洲直邮，统一运费，不限重量，但是避免清关时产生税费，建议每笔订单购买商品重量不超过3kg。只有预计到货时间7-15天 </view>
+  </view>
+  <view class="comment">
+    <view>买家留言</view>
     <image src="/images/goods-detail/right.png"></image>
   </view>
+</view>
+
+<view class="footer-box">
 </view>
