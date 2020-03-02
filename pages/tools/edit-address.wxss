@@ -1,1 +1,83 @@
 /* pages/tools/edit-address.wxss */
+page{
+  background-color: #fff;
+}
+.header{
+  width: 100%;
+  height: 8vh;
+  display: flex;
+}
+.header view{
+  position: relative;
+  color: #fff;
+  margin: 20rpx 20rpx 0rpx;
+  font-size: 35rpx;
+}
+
+.container{
+  width: 100%;
+}
+.container .box{
+  width: 90vw;
+  height: 15vw;
+  margin: 2vw 5vw 2vw;
+  border-bottom: 1rpx solid #6c757d;
+}
+.container .box .title{
+  height: 6vw;
+  color: #808080;
+}
+.container .box .info{
+  height: 9vw;
+  width: 90vw;
+}
+.container .box .select{
+  margin-top: 2vw;
+  height: 7vw;
+  width: 90vw;
+}
+.container .select-box{
+  width: 90vw;
+}
+.container .select-box .select-one{
+  width: 90vw;
+  height: 7vw;
+  background-color: #fff;
+  border: 1rpx solid black;
+}
+
+.bar{
+  width: 100vw;
+  margin-top: 20vw; 
+  display: flex;
+  justify-content: space-evenly;
+}
+.bar .button1{
+  width: 16vw;
+  height:10vw;
+  color: #fff;
+  border-radius: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.bar .button2{
+  width: 38vw;
+  height:10vw;
+  background-color: #fff;
+  border-radius: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bar .button3{
+  width: 16vw;
+  height:10vw;
+  color: #fff;
+  background-color: #ff0000;
+  border-radius: 1vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

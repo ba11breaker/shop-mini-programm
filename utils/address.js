@@ -1,5 +1,6 @@
 const common = require("./common/index");
 const env = require("../environment");
+const auth = require("auth");
 
 let _address = []
 
@@ -32,7 +33,9 @@ module.exports = {
   async httpAddress(){
     common.toast.showLoading();
     try{
-      const tokens = await common.storage.get('tokens');
+      const old_tokens = await common.storage.get('tokens');
+      common.http.setToken(old_tokens);
+      const tokens = await auth.renewToken(old_tokens);
       common.http.setToken(tokens);
       var { detail } = await common.http.get("get", "/user/shop/addresses", env.BACKEND_URL);
       const address = detail;
@@ -45,10 +48,22 @@ module.exports = {
     common.toast.hideToast();
   },
 
-  async setDefault(){
+  async postAddress(address){
     common.toast.showLoading();
     try{
       
+    }catch(err){
+      console.error(err);
+    }
+    common.toast.hideToast();
+  },
+
+  async setDefault(id){
+    common.toast.showLoading();
+    try{
+      const userInfo = await common.storage.get('user');
+      await common.http.send("patch", `/user/shop/addresses/set-default/${id}`, {}, env.BACKEND_URL);
+      await common.storage.set(id, `address_selected_${userInfo.id}`);
     } catch (err){
       console.error(err);
     }

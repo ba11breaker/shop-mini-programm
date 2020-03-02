@@ -108,5 +108,15 @@ module.exports = {
       common.toast.showToast("登出失败", "none");
       throw err;
     }
-  }
+  },
+
+  async renewToken(old_tokens) {
+    try {
+      const { detail: tokens } = await common.http.send('post', '/auth/refreshToken', old_tokens, env.AUTH_URL);
+      await common.storage.set(tokens, 'tokens');
+      return tokens;
+    } catch (err) {
+      console.error(err);
+    }
+  },
 }

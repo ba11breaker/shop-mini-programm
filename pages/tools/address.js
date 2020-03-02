@@ -28,8 +28,19 @@ Page({
     });
   },
 
-  chooseAdd(e){
-    console.log(e);
+  async chooseAdd(e){
+    const clickID = e.target.dataset.id;
+    if(clickID != this.data.selIndex){
+      try{
+        console.log(this.data.infos[clickID].id);
+        await helpers.address.setDefault(this.data.infos[clickID].id);
+        this.setData({
+          selIndex: clickID
+        });
+      }catch(err){
+        console.error(err);
+      }
+    }
   },
 
   async editAddress(e){

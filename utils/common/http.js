@@ -11,24 +11,17 @@ module.exports = {
     _master_code = mc;
   },
 
-  async renewToken() {
-    try{
-      const { detail: tokens } = await this.send('post', '/auth/refreshToken', {}, env.AUTH_URL);
-    }catch(err){
-      console.error(err);
-    }
-  },
-
   send(method, url, payload, baseUrl, noToken = false) {
     return new Promise((res, rej) => {
-      const header = {};
+      const header = {
+        'X-HTTP-Method-Override': method
+      };
+      if (method == "patch") method = "post";
       if (_master_code)
         header['x-api-key'] = _master_code;
       if (!noToken && _tokens.token) {
-        header = {
-          authorization: `Bearer ${_tokens.token}`
-        }
-      }
+        header['authorization'] = `Bearer ${_tokens.token}`;
+       }
 
       wx.request({
         method,

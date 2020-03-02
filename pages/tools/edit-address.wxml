@@ -1,2 +1,39 @@
 <!--pages/tools/edit-address.wxml-->
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>编辑地址</view>
+</view>
 
+<view class="container">
+  <view class="box">
+    <view class="title">收货人(Name)</view>
+    <input class="info" value="{{address.name}}" bindinput="updateName"></input>
+  </view>
+  <view class="box">
+    <view class="title">手机号(Mobile)</view>
+    <input class="info" value="{{address.phone}}" bindinput="updatePhone" type="tel"></input>
+  </view>
+  <view class="box">
+    <view class="title">省/直辖市</view>
+    <view class="select" bindtap="chooseState">{{address.state}}</view>
+  </view>
+  <view class="select-box" wx:if="{{selectState.isShow}}">
+    <view class="select-one" wx:for="{{selectState.states}}" wx:key="id" bindtap="clickState" data-id="{{item}}">{{item}}</view>
+  </view>
+  <view class="box">
+    <view class="title">城市</view>
+    <view class="select" bindtap="chooseCity">{{address.city}}</view>
+  </view>
+  <view class="select-box" wx:if="{{selectCity.isShow}}">
+    <view class="select-one" wx:for="{{selectCity.cities}}" wx:key="id" bindtap="clickCity" data-id="{{item}}">{{item}}</view>
+  </view>
+  <view class="box">
+    <view class="title">街道地址(Address)</view>
+    <input class="info" value="{{address.street}}" bindinput="updateStreet"></input>
+  </view>
+</view>
+
+<view class="bar">
+  <view class="button1" style="background-color:{{colors.primary}}" bindtap="preserveInfo">保存</view>
+  <view class="button2" style="background-color:{{colors.primary}}" style="border:1rpx solid {{colors.primary}};color:{{colors.primary}}" bindtap="preserveDefault">保存并设置为默认</view>
+  <view class="button3" bindtap="deleteInfo">删除</view>
+</view>
