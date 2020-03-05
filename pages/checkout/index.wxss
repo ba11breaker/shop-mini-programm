@@ -35,6 +35,31 @@ page{
   height: 3vh;
   margin-right: 30rpx;
 }
+.address-info .has-data{
+  width: 100%;
+}
+.address-info .has-data .bar{
+  width:100%;
+  height: 5vh;
+  padding: 0 20rpx 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: 2.8vh;
+}
+.address-info .has-data .bar image{
+  width: 3vh;
+  height: 3vh;
+  margin-right: 30rpx;
+}
+.address-info .has-data .brief{
+  width: 100%;
+  padding: 0 20rpx 0;
+}
+.address-info .has-data .brief .info-bar{
+  width: 100%;
+  height: 4vh;
+}
 
 .goods-list{
   width: 100%;

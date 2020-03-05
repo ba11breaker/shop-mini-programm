@@ -3,7 +3,17 @@
   <view>确认订单</view>
 </view>
 <view class="address-info">
-  <view class="no-data" wx:if="{{customerInfo.length==0}}">
+  <view class="has-data"  wx:if="{{userInfo.id}}" bindtap="onClickAddress">
+    <view class="bar">
+      <view><text style="color:{{colors.darkPrimary}}">收货人信息</text></view>
+      <image src="/images/goods-detail/right.png" bindtap="onClickGo"></image>
+    </view>
+    <view class="brief">
+      <view class="info-bar" style="font-size:3vh">{{userInfo.name}}   {{userInfo.phone}}</view>
+      <view class="info-bar" style="font-size:2vh">{{userInfo.street}}</view>
+    </view>
+  </view>
+  <view class="no-data" wx:else>
     <view><text wx:if="{{isLoggedIn}}" bindtap="onClickAddress">请填写地址</text><block wx:if="{{!isLoggedIn}}"><text bindtap="onClickLogin">登录</text></block></view>
     <image src="/images/goods-detail/right.png" bindtap="onClickGo"></image>
   </view>

@@ -25,6 +25,7 @@ Page({
   },
 
   onShow: function() {
+    this.setUserInfo();
     this.setCheckoutList();
     this.setData({
       customerInfo: app.globalData.customerInfo,
@@ -45,6 +46,14 @@ Page({
   onClickAddress: function(e) {
     wx.navigateTo({
       url: '/pages/tools/address',
+    })
+  },
+
+  // 设置默认地址信息
+  async setUserInfo(){
+    const userInfo = await helpers.address.getDefault();
+    this.setData({
+      userInfo: userInfo
     })
   },
 

@@ -14,6 +14,6 @@
   </view>
 </view>
 
-<view class="add-address" style="background-color:{{colors.primary}}">
+<view class="add-address" style="background-color:{{colors.primary}}" bindtap="addAddress">
   新增收货地址
 </view>

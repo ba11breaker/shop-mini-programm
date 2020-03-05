@@ -51,7 +51,7 @@ module.exports = {
   async postAddress(address){
     common.toast.showLoading();
     try{
-      
+      await common.http.send("post", "/user/shop/addresses", {payload: address}, env.BACKEND_URL);
     }catch(err){
       console.error(err);
     }
@@ -68,5 +68,28 @@ module.exports = {
       console.error(err);
     }
     common.toast.hideToast();
+  },
+
+  async deleteAddress(address){
+    common.toast.showLoading();
+    try{
+      await common.http.send("patch", '/user/shop/addresses/deleteAddress', { payload: address }, env.BACKEND_URL);
+    }catch (err){
+      console.error(err);
+    }
+    common.toast.hideToast();
+  },
+
+  async getDefault(){
+    try{
+      const old_tokens = await common.storage.get('tokens');
+      common.http.setToken(old_tokens);
+      const tokens = await auth.renewToken(old_tokens);
+      common.http.setToken(tokens);
+      var { detail } = await common.http.get("get", "/user/shop/addresses/get-default", env.BACKEND_URL);
+      return detail;
+    }catch(err){
+      console.error(err);
+    }
   }
 }

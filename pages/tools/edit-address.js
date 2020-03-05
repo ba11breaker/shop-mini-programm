@@ -135,16 +135,30 @@ Page({
     try{
       const address = this.data.address;
       await helpers.address.postAddress(address);
+      wx.navigateBack();
     }catch(err){
       console.error(err);
     }
   },
 
-  preserveDefault(e){
-
+  async preserveDefault(e){
+    try{
+      const address = this.data.address;
+      await helpers.address.postAddress(address);
+      await helpers.address.setDefault(address.id);
+      wx.navigateBack();
+    }catch(err){
+      console.error(err);
+    }
   },
 
-  deleteInfo(e){
-
+  async deleteInfo(e){
+    try{
+      const address = this.data.address;
+      await helpers.address.deleteAddress(address);
+      wx.navigateBack();
+    }catch(err){
+      console.error(err);
+    }
   }
 })

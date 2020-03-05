@@ -55,6 +55,16 @@ Page({
     }
   },
 
+  async addAddress(e){
+    try{
+      wx.navigateTo({
+        url: '/pages/tools/edit-address?type=add',
+      })
+    }catch(err){
+      console.error(err);
+    }
+  },
+
   async getInfos(){
     try{
       const userInfo = await helpers.storage.get('user');
