@@ -144,7 +144,7 @@ Page({
       app.globalData.stock = stockInfo.data.detail;
 
       // 获取当前汇率
-      app.globalData.currentRate = 7.732341234;
+      app.globalData.currentRate = 4.732341234;
 
       //获取购物车缓存
       try{

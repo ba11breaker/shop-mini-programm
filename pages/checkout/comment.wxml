@@ -1,0 +1,8 @@
+<!--pages/checkout/comment.wxml-->
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>买家留言</view>
+</view>
+<view class="comment-container">
+  <textarea placeholder="请输入留言" value="{{comment}}" bindinput="textAreaBlur"></textarea>
+</view>
+<view class="edit-comment" style="background-color:{{colors.primary}}" bindtap="submit">确认</view>

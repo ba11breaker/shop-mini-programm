@@ -36,11 +36,21 @@
     <view class="title">配送声明</view>
     <view class="content"> 澳洲直邮，统一运费，不限重量，但是避免清关时产生税费，建议每笔订单购买商品重量不超过3kg。只有预计到货时间7-15天 </view>
   </view>
-  <view class="comment">
+  <view class="comment" bindtap="clickComment">
     <view>买家留言</view>
     <image src="/images/goods-detail/right.png"></image>
   </view>
+  <view class="comment-content">{{comment}}</view>
 </view>
 
 <view class="footer-box">
+  <view class="bar">
+    <view class="price1">合计:<text style="color:{{colors.primary}}">${{cost[0]}}</text></view>
+    <view class="price2">共{{amount}}件,(约￥{{cost[1]}})</view>
+  </view>
+  <view class="submit-button">
+    <view class="button" style="background-color:{{colors.darkPrimary}}" bindtap="submit">
+      <text>提交订单</text>
+    </view>
+  </view>
 </view>

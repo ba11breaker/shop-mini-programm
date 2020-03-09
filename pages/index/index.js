@@ -114,6 +114,7 @@ Page({
     for(var i = 0; i < brandsInfo.length; i++){
       brandsInfo[i].imageUrl = `${app.globalData.imagesApiBaseUrl}/${brandsInfo[i].imageUrl}`;
     }
+    brandsInfo = brandsInfo.splice(0, 6);
     that.setData({
       homeBrands: brandsInfo
     });

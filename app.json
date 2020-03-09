@@ -10,9 +10,11 @@
     "pages/cart/index",
     "pages/my/index",
     "pages/checkout/index",
+    "pages/checkout/comment",
     "pages/login/index",
     "pages/tools/address",
-    "pages/tools/edit-address"
+    "pages/tools/edit-address",
+    "pages/pay/index"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -146,6 +146,14 @@ page{
   width: 5vw;
   height: 5vw;
 }
+.order-info .comment-content{
+  width: 95vw;
+  padding: 0 0 4vw;
+  margin: 0 auto;
+  word-break: break-all;
+  color: #6c757d; 
+  font-size: 3.8vw;
+}
 
 .footer-box{
   width: 100%;
@@ -158,4 +166,35 @@ page{
   justify-content: space-between;
   flex-wrap: wrap;
   box-shadow: 0 0 6rpx 0;
+}
+.footer-box .bar{
+  width: 60vw;
+}
+.footer-box .price1{
+  height: 50rpx;
+  font-size: 30rpx;
+  margin-left: 20rpx;
+}
+.footer-box .price2{
+  height: 50rpx;
+  font-size: 25rpx;
+  color: #808080;
+  margin-left: 20rpx;
+}
+.footer-box .submit-button{
+  width: 35vw;
+  height: 100rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.footer-box .submit-button .button{
+  width: 30vw;
+  height: 70rpx;
+  border-radius: 1vw;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30rpx;
 }

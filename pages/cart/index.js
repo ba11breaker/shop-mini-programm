@@ -311,8 +311,8 @@ Page({
         totalPrice.rmb += cartGoods[i].price[1] * cart[i][1];
       }
     }
-    totalPrice.aud = Math.round(totalPrice.aud * 100) / 100;
-    totalPrice.rmb = Math.round(totalPrice.rmb * 100) / 100;
+    totalPrice.aud = Math.floor(totalPrice.aud * 100) / 100;
+    totalPrice.rmb = Math.floor(totalPrice.rmb * 100) / 100;
     this.setData({
       totalPrice: totalPrice
     });

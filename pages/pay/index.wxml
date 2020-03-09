@@ -1,0 +1,4 @@
+<!--pages/pay/index.wxml-->
+<view class="header" style="background-color:{{colors.darkPrimary}}">
+  <view>支付订单</view>
+</view>

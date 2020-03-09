@@ -13,6 +13,10 @@ Page({
     checkoutList: [],
     colors: {},
     userInfo: {},
+    comment: "",
+
+    cost: [0, 0],
+    amount: 0,
 
     isLoggedIn: false,
   },
@@ -32,6 +36,15 @@ Page({
       colors: JSON.parse(app.globalData.colors),
       isLoggedIn: helpers.auth.isLoggedIn(),
     });
+    this.setComment();
+  },
+
+  onUnload: async function() {
+    try{
+      await helpers.storage.remove("comment");
+    }catch(err){
+      console.error(err);
+    }
   },
 
   onClickLogin: function(e) {
@@ -73,6 +86,7 @@ Page({
       this.setData({
         checkoutList: checkoutList
       })
+      this.setCost();
     } catch(err) {
       console.error(err);
     }
@@ -104,6 +118,45 @@ Page({
       } catch(err) {
         console.error(err);
       }
+    })
+  },
+
+  setCost(){
+    const goods = this.data.checkoutList;
+    let amount = 0;
+    let cost = [0, 0];
+    goods.forEach(element => {
+      amount += element.qty;
+      cost[0] += element.good.price[0] * element.qty;
+    });
+    cost[0] = Math.round(cost[0] * 100) / 100;
+    cost[1] = Math.round(cost[0] * app.globalData.currentRate * 100) / 100;
+    this.setData({
+      amount: amount,
+      cost: cost
+    })
+  },
+
+  async setComment(){
+    try{
+      const comment = await helpers.storage.get("comment");
+      this.setData({
+        comment: comment
+      })
+    }catch(err){
+      console.error(err);
+    }
+  },
+
+  clickComment(e){
+    wx.navigateTo({
+      url: '/pages/checkout/comment',
+    })
+  },
+
+  submit(){
+    wx.navigateTo({
+      url: '/pages/pay/index',
     })
   }
 })
