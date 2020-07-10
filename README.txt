@@ -1,1 +1,1 @@
-QPanda miniprogramme Project 
+Miniprogramme Project 
